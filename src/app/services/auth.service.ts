@@ -10,6 +10,7 @@ export class AuthService {
 
   authUrl: string = `${environment.baseUrl}/auth`;
   loggedIn: boolean = false;
+  isAdmin: boolean =false; //checks for admin
 
   constructor(private http: HttpClient) { }
 

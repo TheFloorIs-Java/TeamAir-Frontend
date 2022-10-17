@@ -23,8 +23,9 @@ export class LoginComponent implements OnInit {
   
   onSubmit(): void {
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
-      () => {
+      (data) => {
         this.authService.loggedIn=true;
+        this.authService.isAdmin=(data.userOrAdmin=="admin"); //checks for admin, if true then they are admin
       },
       (err) => console.log(err),
       () => this.router.navigate(['home'])
