@@ -26,3 +26,7 @@
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
     transform: translate3d(0,-10px,0);
   }
+
+  .quantity {
+    max-width: 50px;
+  }

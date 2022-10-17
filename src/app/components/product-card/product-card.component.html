@@ -18,5 +18,6 @@
       </div>
     <div class="card-body">
         <button class="btn btn-outline-success" (click)="addToCart(productInfo)">Add to Cart</button>
+        <input [(ngModel)] = "quantity" class = "quantity" type = "number" min = "0" max = "productInfo.quantity">
     </div>
   </div>

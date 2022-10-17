@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductCardComponent implements OnInit{
 
+  quantity : number = 0;
   cartCount!: number;
   products: {
     product: Product,
@@ -34,38 +35,39 @@ export class ProductCardComponent implements OnInit{
 
   addToCart(product: Product): void {
 
-    let inCart = false;
-
-    this.products.forEach(
-      (element) => {
-        if(element.product == product){
-          ++element.quantity;
-          let cart = {
-            cartCount: this.cartCount + 1,
-            products: this.products,
-            totalPrice: this.totalPrice + product.price
+    if (this.quantity != 0) {
+      let inCart = false;
+      this.products.forEach(
+        (element) => {
+          if(element.product == product){
+            ++element.quantity;
+            let cart = {
+              cartCount: this.cartCount + this.quantity,
+              products: this.products,
+              totalPrice: this.totalPrice + product.price*this.quantity
+            };
+            this.productService.setCart(cart);
+            inCart=true;
+            return;
           };
-          this.productService.setCart(cart);
-          inCart=true;
-          return;
+        }
+      );
+  
+      if(inCart == false){
+        let newProduct = {
+          product: product,
+          quantity: this.quantity
         };
+        this.products.push(newProduct);
+        let cart = {
+          cartCount: this.cartCount + this.quantity,
+          products: this.products,
+          totalPrice: this.totalPrice + product.price*this.quantity
+        }
+        this.productService.setCart(cart);
       }
-    );
-
-    if(inCart == false){
-      let newProduct = {
-        product: product,
-        quantity: 1
-      };
-      this.products.push(newProduct);
-      let cart = {
-        cartCount: this.cartCount + 1,
-        products: this.products,
-        totalPrice: this.totalPrice + product.price
-      }
-      this.productService.setCart(cart);
     }
-      
+    
   }
 
   ngOnDestroy() {
