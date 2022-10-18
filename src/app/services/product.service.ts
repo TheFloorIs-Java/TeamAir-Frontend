@@ -7,26 +7,35 @@ import { environment } from 'src/environments/environment';
 interface Cart {
   cartCount: number;
   products: {
-    product: Product,
-    quantity: number
+    product: Product;
+    quantity: number;
   }[];
   totalPrice: number;
 }
+interface cartProducts {
+  products: {
+    product: Product;
+    quantity: number;
+  }[];
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
-  private productUrl: string = "/api/product";
+  private productUrl: string = '/api/product';
 
   private _cart = new BehaviorSubject<Cart>({
     cartCount: 0,
     products: [],
-    totalPrice: 0.00
+    totalPrice: 0.0,
+  });
+  private cartProducts = new BehaviorSubject<cartProducts>({
+    products: [],
   });
 
   private _cart$ = this._cart.asObservable();
+  private _cartProducts$ = this.cartProducts.asObservable();
 
   getCart(): Observable<Cart> {
     return this._cart$;
@@ -35,19 +44,37 @@ export class ProductService {
   setCart(latestValue: Cart) {
     return this._cart.next(latestValue);
   }
+  getCartProducts(): Observable<cartProducts> {
+    return this._cartProducts$;
+  }
+  setCartProducts(latestValue: cartProducts) {
+    return this.cartProducts.next(latestValue);
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.baseUrl+this.productUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
+    return this.http.get<Product[]>(environment.baseUrl + this.productUrl, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
   }
 
   public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+id);
+    return this.http.get<Product>(environment.baseUrl + id);
   }
 
-  public purchase(products: {id:number, quantity:number}[]): Observable<any> {
+  public purchase(
+    products: { id: number; quantity: number }[]
+  ): Observable<any> {
     const payload = JSON.stringify(products);
-    return this.http.patch<any>(environment.baseUrl+this.productUrl, payload, {headers: environment.headers, withCredentials: environment.withCredentials})
+    return this.http.patch<any>(
+      environment.baseUrl + this.productUrl,
+      payload,
+      {
+        headers: environment.headers,
+        withCredentials: environment.withCredentials,
+      }
+    );
   }
 }
