@@ -28,5 +28,19 @@
   }
 
   .quantity {
-    max-width: 50px;
+    width: 50%;
+    justify-content: center;
+    display: flex;
+  }
+
+  .card-body2 {
+    display: flex;
+    padding-bottom: 1em;
+    
+  }
+
+  .addbutton {
+    width: 50%;
+    justify-content: center;
+    display: flex;
   }
