@@ -12,12 +12,12 @@ interface Cart {
   }[];
   totalPrice: number;
 }
-interface cartProducts {
-  products: {
-    product: Product;
-    quantity: number;
-  }[];
-}
+// interface cartProducts {
+//   products: {
+//     product: Product;
+//     quantity: number;
+//   }[];
+// }
 
 @Injectable({
   providedIn: 'root',
@@ -30,12 +30,12 @@ export class ProductService {
     products: [],
     totalPrice: 0.0,
   });
-  private cartProducts = new BehaviorSubject<cartProducts>({
-    products: [],
-  });
+  // private cartProducts = new BehaviorSubject<cartProducts>({
+  //   products: [],
+  // });
 
   private _cart$ = this._cart.asObservable();
-  private _cartProducts$ = this.cartProducts.asObservable();
+  // private _cartProducts$ = this.cartProducts.asObservable();
 
   getCart(): Observable<Cart> {
     return this._cart$;
@@ -44,12 +44,12 @@ export class ProductService {
   setCart(latestValue: Cart) {
     return this._cart.next(latestValue);
   }
-  getCartProducts(): Observable<cartProducts> {
-    return this._cartProducts$;
-  }
-  setCartProducts(latestValue: cartProducts) {
-    return this.cartProducts.next(latestValue);
-  }
+  // getCartProducts(): Observable<cartProducts> {
+  //   return this._cartProducts$;
+  // }
+  // setCartProducts(thevalue: cartProducts) {
+  //   return this.cartProducts.next(thevalue);
+  // }
 
   constructor(private http: HttpClient) {}
 

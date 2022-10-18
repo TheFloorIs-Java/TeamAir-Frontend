@@ -14,7 +14,10 @@
       <td>{{ product.product.name }}</td>
       <td>{{ product.quantity }}</td>
       <td>{{ product.product.description }}</td>
-      <button class="btn btn-warning" (click)="removeItemsFromService()">
+      <button
+        class="btn btn-warning"
+        (click)="removeItemsFromService(product.product.name)"
+      >
         remove
       </button>
     </tr>
