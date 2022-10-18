@@ -1,22 +1,49 @@
 <img src="../../../assets/images/rev-logo.png" width="30%" height="30%" alt="Revature">
 <form id="register-form" [formGroup]="registerForm">
-    <div class="form-group">
+    
+  
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> 
+  <div class="form-group">
         <label for="inputFirstName">First Name</label>
-        <input type="text" class="form-control" formControlName="fname" id="inputFirstName" placeholder="Enter First Name">
-      </div>
-    <div class="form-group">
+        <input type="text" class="form-control" formControlName="fname" id="inputFirstName" required placeholder="Enter First Name" [ngClass]="{ 'is-invalid': submitted && f.fname.errors }">
+        <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+          <div *ngIf="f.fname.errors.required"> First name is required</div>
+        </div>
+   </div>
+      
+  
+      <div class="form-group">
+        
         <label for="inputLastName">Last Name</label>
-        <input type="text" class="form-control" formControlName="lname" id="inputLastName" placeholder="Enter Last Name">
+        <input type="text" class="form-control" formControlName="lname" id="inputLastName" placeholder="Enter Last Name" [ngClass]="{ 'is-invalid': submitted && f.lname.errors }">
+        <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+        <div *ngIf="f.lname.errors.required"> Last name is required</div>
+        </div>
+      
     </div>
+    
     <div class="form-group">
       <label for="inputEmail">Email address</label>
-      <input type="email" class="form-control" formControlName="email" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter Email">
+      <input type="email" class="form-control" formControlName="email" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required"> Email is required</div>
+        </div>
       <small id="emailHelp" class="form-text text-muted">Ensure you enter the correct email</small>
     </div>
+    
     <div class="form-group">
+      
       <label for="inputPassword">Password</label>
-      <input type="password" class="form-control" formControlName="password" id="inputPassword" placeholder="Enter Password">
+      <input type="password" class="form-control" formControlName="password" id="inputPassword" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors.required">Password is required</div>
+      <div *ngIf="f.password.errors.minlength"> Password must be at least 8 characters</div>
+      
+      </div>
+    
     </div>
+    </form>
+ 
     <button class="btn btn-primary" (click)="onSubmit()">Register</button>
-</form>
+
 

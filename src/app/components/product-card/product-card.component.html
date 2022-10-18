@@ -32,16 +32,19 @@
       disabled
     />
   </div>
-  <div class="card-body">
-    <button class="btn btn-outline-success" (click)="addToCart(productInfo)">
-      Add to Cart
-    </button>
-    <input
-      [(ngModel)]="quantity"
-      class="quantity"
-      type="number"
-      min="0"
-      max="{{ productInfo.quantity }}"
-    />
+  <div class="card-body2">
+    <div class="addbutton">
+      <button class="btn btn-outline-success" (click)="addToCart(productInfo)">
+        Add to Cart
+      </button>
+    </div>
+    <div class="quantity">
+      <input
+        [(ngModel)]="quantity"
+        type="number"
+        min="0"
+        max="{{ productInfo.quantity }}"
+      />
+    </div>
   </div>
 </div>
