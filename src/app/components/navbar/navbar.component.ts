@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit{
 
   cartCount!: number;
   subscription!: Subscription;
-
+  isAdmin: boolean =this.authService.isAdmin;
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
   

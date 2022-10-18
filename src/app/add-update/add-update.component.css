@@ -1,0 +1,32 @@
+#body{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+input, select{
+    width:200px;
+    margin: 5px;
+    height: 30px;
+}
+
+.button{
+    width: 150px;
+
+}
+.section{
+    display: flex;
+    flex-direction: column;
+    border: 1px black solid;
+    width: 450px;
+    padding: 30px;
+    align-items: center;
+    margin: 30px;
+}
+.section:hover{
+    box-shadow: 0 0 15px rgba(33, 33, 33, 0.295); 
+}
+
+#popout{
+    display: flex;
+    flex-direction: column;  
+}
