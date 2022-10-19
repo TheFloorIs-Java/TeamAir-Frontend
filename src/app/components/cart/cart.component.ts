@@ -3,12 +3,6 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
-interface cartProducts {
-  products: {
-    product: Product;
-    quantity: number;
-  }[];
-}
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -20,8 +14,8 @@ export class CartComponent implements OnInit {
     quantity: number;
   }[] = [];
   totalPrice!: number;
+  cartCounts: number = 0;
   cartProducts: Product[] = [];
-  selectedProduct: String = '';
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
@@ -31,6 +25,7 @@ export class CartComponent implements OnInit {
         this.cartProducts.push(element.product)
       ); // to add products from products section to the cart
       this.totalPrice = cart.totalPrice; // also adds the total price
+      this.cartCounts = cart.cartCount;
     });
   }
 
@@ -45,43 +40,25 @@ export class CartComponent implements OnInit {
   }
   /**
    * This method should remove each individual product from cart after the "remove" button is clicked.
-   * This should also decrement from the total price each time an item gets removed the cart.
-   * @param selectedProduct the item selected for removal
+   * This should also decrement from the total price each time an item gets removed the cart plus
+   * the cart count on the cart bar.
+   * @param id the item selected for removal
    */
-  removeItemsFromService(selectedProduct: string): void {
-    console.log(this.products);
-    let productsRemoved: {
-      product: Product;
-      quantity: number;
-    }[] = this.products;
+  removeItemsFromService(id: number): void {
     for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].product.name == selectedProduct[i]) {
-        productsRemoved.slice(i, 1);
-        this.products = productsRemoved;
-        console.log(this.products);
+      if (this.products[i].product.id == id) {
+        this.totalPrice -=
+          this.products[i].product.price * this.products[i].quantity;
+        this.cartCounts -= this.products[i].quantity;
+        console.log(this.cartCounts);
+        this.products.splice(i, 1);
       }
     }
-    // this.products = [];
-    // this.totalPrice = 0;
-    // this.cartProducts = [];
-    // console.log(this.cartProducts);
-    // this.productService.getCart().subscribe((cart) => {
-    //   cart.products.forEach((element) => {
-    //     if (element.product.name != selectedProduct) {
-    //       this.products.push(element);
-    //     }
-    //   });
-    //   this.products.forEach((element) => {
-    //     if (element.product.name != selectedProduct) {
-    //       this.cartProducts.push(element.product);
-    //     }
-    //   });
-    //   this.totalPrice = cart.totalPrice;
-    //   console.log(this.cartProducts);
-    // });
-    // let products = { products: [] };
-    // this.productService.setCartProducts(products);
-    // this.router.navigate(['/cart']);
-    // console.log(products);
+    let cartProd = {
+      cartCount: this.cartCounts,
+      products: this.products,
+      totalPrice: this.totalPrice,
+    };
+    this.productService.setCart(cartProd);
   }
 }
