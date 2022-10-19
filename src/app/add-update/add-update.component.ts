@@ -89,7 +89,7 @@ for(let i =0; i< this.productList.length; i++){
 updateProduct(){
   this.message2="";
   console.log(this.selected)
-  if (this.selected!=undefined){
+  if (this.selected!=undefined && this.updatePrice>=.01 && this.updateQuantity>0){
   this.addupdateS.editProduct(this.selected,this.updateId,this.updateQuantity, this.updateDescription,this.updatePrice, this.updateImage);
   this.message2=this.selected + " updated!";
   this.currentProduct=false;

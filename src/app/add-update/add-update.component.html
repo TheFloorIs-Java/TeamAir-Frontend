@@ -14,11 +14,11 @@
         <div class="label"> Name: </div>
         <input [(ngModel)]="addName" required="" type="text" placeholder="Item Name"/>
         <div class="label"> Quantity: </div>
-        <input [(ngModel)]="addQuantity" type="number" />
+        <input [(ngModel)]="addQuantity" type="number"  min="1" />
         <div class="label"> Description: </div>
         <input [(ngModel)]="addDescription"  type="text" placeholder="Item Description"/>
         <div class="label"> Price: </div>
-        <input [(ngModel)]="addPrice" type="number"/>
+        <input [(ngModel)]="addPrice" type="number"  min=".01" />
         <div class="label"> Image: </div>
         <input [(ngModel)]="addImage" type="text" placeholder="Item Image url"/>
         <button class="btn btn-outline-success" (click)="addNewProduct()">Add Item</button>
@@ -33,11 +33,11 @@
         </select>
         <div *ngIf="currentProduct" id="popout">
             <div class="label"> Quantity: </div>
-            <input type="number" [(ngModel)]="updateQuantity" >
+            <input type="number" [(ngModel)]="updateQuantity" min="1" >
             <div class="label"> Description: </div>
             <input  type="text" [(ngModel)]="updateDescription"/>
             <div class="label"> Price: </div>
-            <input type="number" [(ngModel)]="updatePrice"/>
+            <input type="number" [(ngModel)]="updatePrice"  min=".01"/>
             <div class="label"> Image: </div>
             <input  type="text" [(ngModel)]="updateImage" />
         </div>
