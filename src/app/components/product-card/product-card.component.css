@@ -28,7 +28,8 @@
   }
 
   .quantity {
-    width: 50%;
+    min-width: 4em;
+    width: 10em;
     justify-content: center;
     display: flex;
   }
