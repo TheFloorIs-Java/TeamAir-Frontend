@@ -18,17 +18,24 @@ export class CartComponent implements OnInit {
   cartProducts: Product[] = [];
   constructor(private productService: ProductService, private router: Router) {}
 
+  /**
+   * adds the products from the product list to the Shopping Cart
+   * adds up total price and cart count in the Shopping Cart
+   */
   ngOnInit(): void {
     this.productService.getCart().subscribe((cart) => {
       this.products = cart.products;
       this.products.forEach((element) =>
         this.cartProducts.push(element.product)
       ); // to add products from products section to the cart
-      this.totalPrice = cart.totalPrice; // also adds the total price
-      this.cartCounts = cart.cartCount;
+      this.totalPrice = cart.totalPrice; // adds the total price
+      this.cartCounts = cart.cartCount; //
     });
   }
 
+  /**
+   * This method clears the Shopping Cart and routes back to the page where products are displayed
+   */
   emptyCart(): void {
     let cart = {
       cartCount: 0,
@@ -38,10 +45,10 @@ export class CartComponent implements OnInit {
     this.productService.setCart(cart);
     this.router.navigate(['/home']);
   }
+
   /**
-   * This method should remove each individual product from cart after the "remove" button is clicked.
-   * This should also decrement from the total price each time an item gets removed the cart plus
-   * the cart count on the cart bar.
+   * This method should remove each individual product from cart after a click event fires.
+   * This should also decrement from the total price and the cart count from the Shopping Cart.
    * @param id the item selected for removal
    */
   removeItemsFromService(id: number): void {
