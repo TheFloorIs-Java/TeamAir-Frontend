@@ -37,13 +37,15 @@ export class ProductCardComponent implements OnInit {
   addToCart(product: Product): void {
 
     if (this.quantity != 0) {
-
       if (this.quantity <= this.productInfo.quantity) {
         this.quantityerror = false;
         let inCart = false;
+
+        //This code checks to see if there is an entry for the current product by product id in the cart
+        //If there is a current entry for the product, it will add to the current entry rather than make a new entry
         this.products.forEach(
           (element) => {
-            if (element.product == product) {
+            if (element.product.id == product.id) {
               element.quantity = element.quantity + this.quantity;
               let cart = {
                 cartCount: this.cartCount + this.quantity,
@@ -57,6 +59,8 @@ export class ProductCardComponent implements OnInit {
           }
         );
 
+        //This code uses inCart to determine whether or not the product we are looking at is currently in the cart
+        //Because inCart is false, there is not an entry with our product in the cart, so this code runs to create a new entry by using push
         if (inCart == false) {
           let newProduct = {
             product: product,
