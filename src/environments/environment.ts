@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   withCredentials: true,
-  baseUrl: "http://localhost:8080",
+  baseUrl: "https://ecommerce-app-team-air.azurewebsites.net",
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:4200',
