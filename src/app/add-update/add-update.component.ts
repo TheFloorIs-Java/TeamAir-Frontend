@@ -52,6 +52,8 @@ addNewProduct(){
   this.message="";
   if(this.addName==""){
     this.message+="Item Name is required! ";
+  }else if(this.productNameExists(this.addName)){
+    this.message+="Item Name must be unique! ";
   }else if(this.addQuantity<=0){
     this.message+="Item Quantity must be greater than 0! ";
   }else if(this.addPrice<=0){
@@ -61,11 +63,26 @@ addNewProduct(){
       this.addDescription ="This is a product you can buy."
     }
     if(this.addImage===""){
-      this.addImage ="https://static.vecteezy.com/system/resources/previews/001/195/306/original/bubbles-speech-cool-png.png";
+      this.addImage ="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Question_Mark.svg/2560px-Question_Mark.svg.png";
     }
     this.addupdateS.addNewProduct(this.addName,this.addQuantity,this.addDescription, this.addPrice,this.addImage);
+    this.addName="";
+    this.addQuantity=0;
+    this.addDescription="";
+    this.addImage ="";
+    this.addPrice=0;
     this.message=this.addName + " added!";
+    this.pService.getProducts().subscribe(data=>this.productList=data);
   }
+}
+//checks if the name of the product we want to add already
+// exists in our current product array
+productNameExists(name: string) : boolean{
+for(let i =0; i< this.productList.length; i++){
+  if(name==this.productList[i].name){
+    return true;
+  }
+}return false;
 }
 
 //updates the product and adds a message
@@ -75,6 +92,7 @@ updateProduct(){
   if (this.selected!=undefined){
   this.addupdateS.editProduct(this.selected,this.updateId,this.updateQuantity, this.updateDescription,this.updatePrice, this.updateImage);
   this.message2=this.selected + " updated!";
+  this.currentProduct=false;
   }
 }
 
