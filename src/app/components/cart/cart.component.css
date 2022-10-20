@@ -1,7 +1,27 @@
 .table {
   margin: 3%;
+  max-width: 90%;
 }
 
 .btn {
   margin-left: 2%;
+}
+p.remove {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+  background: #e0e0e0;
+  padding: 0.5em;
+  font-size: 0.75em;
+  display: inline-block;
+  border-radius: 100%;
+  margin-top: 20px;
+  line-height: 0.85;
+  /* box-shadow: rgba(255, 255, 255, 0.08) 0px 8px 8px 0; */
+  transition: all, 0.25s, linear;
+}
+p.remove:hover {
+  background: rgb(240, 58, 13);
+  color: azure;
+  cursor: pointer;
 }

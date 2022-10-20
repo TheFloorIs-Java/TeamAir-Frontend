@@ -5,10 +5,11 @@
 export const environment = {
   production: false,
   withCredentials: true,
-  baseUrl: "https://ecommerce-app-team-air.azurewebsites.net",
+  baseUrl: 'https://ecommerce-app-team-air.azurewebsites.net',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'https://team-air-frontend.azurewebsites.net',
+    'Access-Control-Allow-Origin':
+      'https://team-air-frontend.azurewebsites.net',
   },
 };
 
@@ -18,5 +19,7 @@ export const environment = {
  *
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
+ * backend: https://ecommerce-app-team-air.azurewebsites.net
+ * frontend: https://team-air-frontend.azurewebsites.net
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
