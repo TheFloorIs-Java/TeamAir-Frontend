@@ -48,6 +48,9 @@
     </div>
   </div>
   <div [hidden] = "!quantityerror">
-    <p>Cannot add to cart! Not enough in stock.</p>
+    <p class = "error">Cannot add to cart! Not enough in stock.</p>
+  </div>
+  <div [hidden] = "!cartquantityerror">
+    <p class = "error">Cannot add to cart! Amount in cart would exceed quantity in stock</p>
   </div>
 </div>

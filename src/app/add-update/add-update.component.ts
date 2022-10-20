@@ -57,7 +57,7 @@ addNewProduct(){
   }else if(this.addQuantity<=0){
     this.message+="Item Quantity must be greater than 0! ";
   }else if(this.addPrice<=0){
-    this.message+="Item Quantity must be greater than 0! ";
+    this.message+="Item Price must be greater than 0! ";
   }else{
     if(this.addDescription===""){
       this.addDescription ="This is a product you can buy."
@@ -66,12 +66,12 @@ addNewProduct(){
       this.addImage ="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Question_Mark.svg/2560px-Question_Mark.svg.png";
     }
     this.addupdateS.addNewProduct(this.addName,this.addQuantity,this.addDescription, this.addPrice,this.addImage);
+    this.message=this.addName + " added!";
     this.addName="";
     this.addQuantity=0;
     this.addDescription="";
     this.addImage ="";
     this.addPrice=0;
-    this.message=this.addName + " added!";
     this.pService.getProducts().subscribe(data=>this.productList=data);
   }
 }
@@ -88,7 +88,6 @@ for(let i =0; i< this.productList.length; i++){
 //updates the product and adds a message
 updateProduct(){
   this.message2="";
-  console.log(this.selected)
   if (this.selected!=undefined && this.updatePrice>=.01 && this.updateQuantity>0){
   this.addupdateS.editProduct(this.selected,this.updateId,this.updateQuantity, this.updateDescription,this.updatePrice, this.updateImage);
   this.message2=this.selected + " updated!";

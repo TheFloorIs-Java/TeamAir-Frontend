@@ -19,6 +19,7 @@ export class ProductCardComponent implements OnInit {
   subscription!: Subscription;
   totalPrice: number = 0;
   quantityerror: boolean = false;
+  cartquantityerror: boolean = false;
 
   @Input() productInfo!: Product;
 
@@ -36,25 +37,38 @@ export class ProductCardComponent implements OnInit {
 
   addToCart(product: Product): void {
 
-    if (this.quantity != 0) {
+    //addto cart will only run under three conditions...
+    // 1. The quantity added is greater than zero
+    // 2. The quantity added is less than or equal to the current inventory of the product
+    // 3. The quantity added does not make the product's quantity in the cart exceed the product's inventory
+
+    if (this.quantity > 0) {
       if (this.quantity <= this.productInfo.quantity) {
         this.quantityerror = false;
+        this.cartquantityerror = false;
         let inCart = false;
 
         //This code checks to see if there is an entry for the current product by product id in the cart
         //If there is a current entry for the product, it will add to the current entry rather than make a new entry
         this.products.forEach(
           (element) => {
+            console.log(element.quantity + this.quantity > this.productInfo.quantity);
             if (element.product.id == product.id) {
-              element.quantity = element.quantity + this.quantity;
-              let cart = {
-                cartCount: this.cartCount + this.quantity,
-                products: this.products,
-                totalPrice: this.totalPrice + product.price * this.quantity
-              };
-              this.productService.setCart(cart);
               inCart = true;
-              return;
+              if (!(element.quantity + this.quantity > this.productInfo.quantity)) {
+                element.quantity = element.quantity + this.quantity;
+                let cart = {
+                  cartCount: this.cartCount + this.quantity,
+                  products: this.products,
+                  totalPrice: this.totalPrice + product.price * this.quantity
+                };
+                this.productService.setCart(cart);
+                return;
+              } else {
+                //return error
+                this.cartquantityerror = true;
+              }
+              
             };
           }
         );

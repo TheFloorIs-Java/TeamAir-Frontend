@@ -10,7 +10,7 @@
   img
   {
     justify-content: center;
-    height: auto;
+    height: 200px;
     width: auto;
     max-height: 200px;
     max-width: 307px;
@@ -44,4 +44,8 @@
     width: 50%;
     justify-content: center;
     display: flex;
+  }
+
+  .error {
+    color: red;
   }
