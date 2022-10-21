@@ -12,29 +12,38 @@ import { ReviewServiceService } from 'src/app/services/review-service.service';
 })
 export class ProductCardComponent implements OnInit {
 
+  //booleans that determine error messages on page
+  quantityerror: boolean = false;
+  cartquantityerror: boolean = false;
+
+  //2-way data binded value for quantity added
   quantity: number = 0;
+
   cartCount!: number;
+
+  //Represents the current cart
   products: {
     product: Product,
     quantity: number
   }[] = [];
   subscription!: Subscription;
   totalPrice: number = 0;
-  quantityerror: boolean = false;
-  cartquantityerror: boolean = false;
+
+
 
   @Input() productInfo!: Product;
 
 
   @Output()
-  reloadReviews : EventEmitter<any> =new EventEmitter<any>();
+  reloadReviews: EventEmitter<any> = new EventEmitter<any>();
 
-  currentReviewList: Array<number>=[];
-  newRating :number=1;
-  newMessage : string="";
-   addReviewButton : boolean=false;
-   reviewColor: string = "Reviews";
-  constructor(private productService: ProductService, private reviewService : ReviewServiceService) { }
+  currentReviewList: Array<number> = [];
+  newRating: number = 1;
+  newMessage: string = "";
+  addReviewButton: boolean = false;
+  reviewColor: string = "Reviews";
+
+  constructor(private productService: ProductService, private reviewService: ReviewServiceService) { }
 
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
@@ -44,17 +53,21 @@ export class ProductCardComponent implements OnInit {
         this.totalPrice = cart.totalPrice;
       }
     );
-  
+
   }
-  
+
+  /**
+   * Adds product to cart
+   * @param product Product to be added to cart
+   */
+
   addToCart(product: Product): void {
 
     //addto cart will only run under three conditions...
-    // 1. The quantity added is greater than zero
-    // 2. The quantity added is less than or equal to the current inventory of the product
-    // 3. The quantity added does not make the product's quantity in the cart exceed the product's inventory
 
+    //check if the quantity to be added is non negative
     if (this.quantity > 0) {
+      //check if the quantity to be added is not larger than the current stock
       if (this.quantity <= this.productInfo.quantity) {
         this.quantityerror = false;
         this.cartquantityerror = false;
@@ -65,8 +78,10 @@ export class ProductCardComponent implements OnInit {
         this.products.forEach(
           (element) => {
             console.log(element.quantity + this.quantity > this.productInfo.quantity);
+            //checks to see if the current item is in the cart or not
             if (element.product.id == product.id) {
               inCart = true;
+              //checks to see if the quantity to be added will be more than current stock
               if (!(element.quantity + this.quantity > this.productInfo.quantity)) {
                 element.quantity = element.quantity + this.quantity;
                 let cart = {
@@ -80,13 +95,13 @@ export class ProductCardComponent implements OnInit {
                 //return error
                 this.cartquantityerror = true;
               }
-              
+
             };
           }
         );
 
         //This code uses inCart to determine whether or not the product we are looking at is currently in the cart
-        //Because inCart is false, there is not an entry with our product in the cart, so this code runs to create a new entry by using push
+        //If inCart is false, there is not an entry with our product in the cart, so this code runs to create a new entry by using push
         if (inCart == false) {
           let newProduct = {
             product: product,
@@ -101,6 +116,7 @@ export class ProductCardComponent implements OnInit {
           this.productService.setCart(cart);
         }
       } else {
+        //displays an error message
         this.quantityerror = true;
       }
 
@@ -112,39 +128,39 @@ export class ProductCardComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  addReview(){
-    if(this.newMessage!=""){
-      this.reviewService.addNewReview(this.productInfo.id,this.newRating, this.newMessage);
-      this.newMessage="";
-      this.newRating=1;
-    }   
+  addReview() {
+    if (this.newMessage != "") {
+      this.reviewService.addNewReview(this.productInfo.id, this.newRating, this.newMessage);
+      this.newMessage = "";
+      this.newRating = 1;
+    }
     this.reloadReviews.emit();
     this.reloadReviews.emit();
-    
-  }
-viewReviews(){
-  this.addReviewButton=!this.addReviewButton;
-}
 
-getAverage(reviews: Array<Review> ): number{
-  let avg=0;
-  for(let i =0; i< reviews.length; i++){
-    avg+=reviews[i].rating
   }
-  if(reviews.length>0){
-    avg=avg/reviews.length;
+  viewReviews() {
+    this.addReviewButton = !this.addReviewButton;
   }
-  return avg;
-}
 
-changeColorOfReview(avg : number): string{
-  if(avg<=10 && avg>=8){
-    return "Reviews";
-  }else if (avg<=7 && avg>=5){
-    return "Reviews2";
-  }else{
-    return "Reviews3";
+  getAverage(reviews: Array<Review>): number {
+    let avg = 0;
+    for (let i = 0; i < reviews.length; i++) {
+      avg += reviews[i].rating
+    }
+    if (reviews.length > 0) {
+      avg = avg / reviews.length;
+    }
+    return avg;
   }
-}
+
+  changeColorOfReview(avg: number): string {
+    if (avg <= 10 && avg >= 8) {
+      return "Reviews";
+    } else if (avg <= 7 && avg >= 5) {
+      return "Reviews2";
+    } else {
+      return "Reviews3";
+    }
+  }
 
 }
