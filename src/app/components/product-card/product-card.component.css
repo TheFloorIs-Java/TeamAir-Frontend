@@ -45,7 +45,39 @@
     justify-content: center;
     display: flex;
   }
-
   .error {
     color: red;
   }
+
+.inputValues{
+  margin-top: 5px;
+  background-color: rgba(249, 249, 249, 0.834);
+  border: 1px black solid;
+}
+.Reviews{
+  background-color: rgba(207, 255, 192, 0.392);
+  border-radius: 10px;
+  border: 1px green solid;
+  padding:5px;
+  margin:2px;
+}
+.Reviews2{
+  background-color: rgba(246, 255, 192, 0.392);
+  border-radius: 10px;
+  border: 1px rgb(223, 223, 15) solid;
+  padding:5px;
+  margin:2px;
+}
+.title{
+  font-weight: 300;
+}
+.Reviews3{
+  background-color: rgba(255, 192, 192, 0.392);
+  border-radius: 10px;
+  border: 1px red solid;
+  padding:5px;
+  margin:2px;
+}
+textarea{
+  height:35px;
+}

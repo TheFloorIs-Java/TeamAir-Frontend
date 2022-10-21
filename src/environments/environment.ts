@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   withCredentials: true,
-  baseUrl: 'https://ecommerce-app-team-air.azurewebsites.net',
+  baseUrl: 'http://localhost:8080',
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin':
-      'https://team-air-frontend.azurewebsites.net',
+      'http://localhost:4200',
   },
 };
 

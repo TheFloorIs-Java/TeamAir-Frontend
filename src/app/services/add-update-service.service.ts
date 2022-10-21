@@ -21,8 +21,8 @@ export class AddUpdateServiceService {
   public editProduct(name:string, id:number, quantity: number, description: string, price: number, image: string ){
     const payload = {id:id, name:name, quantity:quantity, description:description,price:price,image:image };
      this.http.put<any>(this.authUrl,payload,{headers: environment.headers, withCredentials: environment.withCredentials}).subscribe(x=> console.log(x));
- 
-  
-
   }
+
+
+  
 }

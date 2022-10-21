@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
+import { Review } from 'src/app/models/review';
 import { ProductService } from 'src/app/services/product.service';
+import { ReviewServiceService } from 'src/app/services/review-service.service';
 
 @Component({
   selector: 'app-product-card',
@@ -23,7 +25,16 @@ export class ProductCardComponent implements OnInit {
 
   @Input() productInfo!: Product;
 
-  constructor(private productService: ProductService) { }
+
+  @Output()
+  reloadReviews : EventEmitter<any> =new EventEmitter<any>();
+
+  currentReviewList: Array<number>=[];
+  newRating :number=1;
+  newMessage : string="";
+   addReviewButton : boolean=false;
+   reviewColor: string = "Reviews";
+  constructor(private productService: ProductService, private reviewService : ReviewServiceService) { }
 
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
@@ -33,8 +44,9 @@ export class ProductCardComponent implements OnInit {
         this.totalPrice = cart.totalPrice;
       }
     );
+  
   }
-
+  
   addToCart(product: Product): void {
 
     //addto cart will only run under three conditions...
@@ -99,5 +111,40 @@ export class ProductCardComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+  addReview(){
+    if(this.newMessage!=""){
+      this.reviewService.addNewReview(this.productInfo.id,this.newRating, this.newMessage);
+      this.newMessage="";
+      this.newRating=1;
+    }   
+    this.reloadReviews.emit();
+    this.reloadReviews.emit();
+    
+  }
+viewReviews(){
+  this.addReviewButton=!this.addReviewButton;
+}
+
+getAverage(reviews: Array<Review> ): number{
+  let avg=0;
+  for(let i =0; i< reviews.length; i++){
+    avg+=reviews[i].rating
+  }
+  if(reviews.length>0){
+    avg=avg/reviews.length;
+  }
+  return avg;
+}
+
+changeColorOfReview(avg : number): string{
+  if(avg<=10 && avg>=8){
+    return "Reviews";
+  }else if (avg<=7 && avg>=5){
+    return "Reviews2";
+  }else{
+    return "Reviews3";
+  }
+}
 
 }

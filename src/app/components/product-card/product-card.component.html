@@ -12,7 +12,7 @@
       type="number"
       class="form-control"
       aria-label="Sizing example input"
-      [value]="productInfo.price"
+      [value]="productInfo.price | number : '1.2-2'"
       aria-describedby="inputGroup-sizing-sm"
       disabled
     />
@@ -46,6 +46,26 @@
         max="{{ productInfo.quantity }}"
       />
     </div>
+    <div (click)="viewReviews()" class="btn btn-light">
+  Rating:
+    {{getAverage(productInfo.reviews) | number : '1.0-1'}}
+    </div>
+  </div>
+  <div *ngIf="addReviewButton" class="viewAndAddReview" >
+    <div *ngFor="let review of productInfo.reviews" class="{{this.changeColorOfReview(review.rating)}}" >
+     {{review.rating}}-{{review.message}}
+    </div>
+    <div class="inputValues">
+      <div class="inputs">
+        <span class="title">Rating (1-10):</span>
+        <input [(ngModel)]="newRating" type="range" min="1" max="10" /> {{newRating}}
+      </div>
+      <div class="inputs">
+        <span  class="title" >Review: </span>
+        <textarea  class="form-control" [(ngModel)]="newMessage" ></textarea>
+      </div>
+   </div>
+   <button class="btn btn-outline-success"(click)="addReview()"> Add Review</button>
   </div>
   <div [hidden] = "!quantityerror">
     <p class = "error">Cannot add to cart! Not enough in stock.</p>
