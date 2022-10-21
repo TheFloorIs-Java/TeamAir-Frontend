@@ -36,11 +36,26 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.authService.register(this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('email')?.value, this.registerForm.get('password')?.value).subscribe(
+    this.authService.login(this.registerForm.get('email')?.value, this.registerForm.get('password')?.value).subscribe(
+      (data) => {
+        () => alert("User already exists")
+      }, 
+      (err) => { this.authService.register(this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('email')?.value, this.registerForm.get('password')?.value).subscribe(
+        () => alert("New user registered"),
+        (err) => console.log(err),
+        () => this.router.navigate(['login'])
+       );}, 
+       
+
+);
+
+  /*  this.authService.register(this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('email')?.value, this.registerForm.get('password')?.value).subscribe(
       () => alert("New user registered"),
       (err) => console.log(err),
       () => this.router.navigate(['login'])
-    );
+    ); */
+
+
   }
 
 }

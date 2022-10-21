@@ -1,11 +1,12 @@
 <app-navbar></app-navbar>
-
+<form id="register-form" [formGroup]="checkoutForm">
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()"> 
 <div class="container mt-5 px-5">
 
     <div class="mb-4">
 
         <h2>Confirm order and pay</h2>
-    <span>please make the payment, after that you can enjoy all the features and benefits.</span>
+    <span>Please make the payment, after that you can enjoy all the features and benefits.</span>
         
     </div>
     <div class="row">
@@ -13,21 +14,47 @@
             <div class="card p-3">
 
                 <h6 class="text-uppercase">Payment details</h6>
-                <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" required="required"> <span>Name on card</span> </div>
+                <div class="inputbox mt-3"> <input type="text" class="form-control" formControlName="fullname" id="inputFullName" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }">
+                    <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
+                    <div *ngIf="f.fullname.errors.required"> First name is required</div>
+                      </div>  
+                
+                    <span>Name on card</span> </div>
 
                 <div class="row">
 
                     <div class="col-md-6">
 
-                        <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <i class="fa fa-credit-card"></i> <span>Card Number</span> 
+                        <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="cardnumber" id="inputCardNumber" [ngClass]="{ 'is-invalid': submitted && f.cardnumber.errors }"> 
+                            <div *ngIf="submitted && f.cardnumber.errors" class="invalid-feedback">
+                                <div *ngIf="f.cardnumber.errors.required"> Invaid card information </div>
+                                  </div>  
+                            
+                        
+                                  <i class="fa fa-credit-card"></i> 
+                            
+                        
+                        <span>Card Number</span> 
                         </div>
 
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex flex-row">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Expiry</span> </div>
+                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="expiration" id="inputExpiration" [ngClass]="{ 'is-invalid': submitted && f.expiration.errors }"> <span>MM/YY</span> 
+                                <div *ngIf="submitted && f.expiration.errors" class="invalid-feedback">
+                                    <div *ngIf="f.expiration.errors.required"> Invalid expiration date </div>
+                                      </div>
+                            
+                            </div>
 
-                        <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>CVV</span> </div>
+                        <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="cvv" id="inputExpiration" [ngClass]="{ 'is-invalid': submitted && f.cvv.errors }"> <span>CVV</span> 
+                            <div *ngIf="submitted && f.cvv.errors" class="invalid-feedback">
+                                <div *ngIf="f.cvv.errors.required">Invalid CVV</div>
+                                  </div>
+                        
+                        
+                        
+                        </div>
                         </div>                        
                     </div>                   
                 </div>
@@ -39,14 +66,25 @@
 
                         <div class="col-md-6">
 
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Street Address</span> </div>
+                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="street" id="inputStreet" [ngClass]="{ 'is-invalid': submitted && f.street.errors }"> <span>Street Address</span> 
+                                <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+                                    <div *ngIf="f.street.errors.required">Invalid Address</div>
+                                      </div>
+                            
+                            
+                            </div>
                             
                         </div>
 
 
                         <div class="col-md-6">
 
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>City</span> </div>
+                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="city" id="inputCity" [ngClass]="{ 'is-invalid': submitted && f.city.errors }"  > <span>City</span> 
+                                <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                    <div *ngIf="f.city.errors.required">Invalid City</div>
+                                      </div>
+                            
+                            </div>
                             
                         </div>
                     </div>
@@ -55,12 +93,22 @@
 
                         <div class="col-md-6">
 
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>State/Province</span> </div>        
+                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="state" id="inputState" [ngClass]="{ 'is-invalid': submitted && f.state.errors }"> <span>State/Province</span> 
+                                <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                                    <div *ngIf="f.state.errors.required">Invalid State</div>
+                                      </div>
+                            
+                            </div>        
 
                         </div>
                         <div class="col-md-6">
 
-                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Zip code</span> </div>              
+                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="zipcode" id="inputZipcode" [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }"  > <span>Zip code</span> 
+                                <div *ngIf="submitted && f.zipcode.errors" class="invalid-feedback">
+                                    <div *ngIf="f.zipcode.errors.required">Invalid Zip code</div>
+                                      </div>
+                            
+                            </div>              
 
                         </div>                      
                     </div>
@@ -88,7 +136,7 @@
 
                 <div class="hightlight">
 
-                    <span>100% Guaranteed Satisfaction!</span>
+                    <span>100% Satisfaction Guaranteed!</span>
                     
 
                 </div>
@@ -99,3 +147,4 @@
         
     </div>
 </div>
+</form>
