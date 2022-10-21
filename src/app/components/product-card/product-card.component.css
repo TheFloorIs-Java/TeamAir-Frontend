@@ -71,6 +71,10 @@
 .title{
   font-weight: 300;
 }
+.title2{
+  font-weight: 200;
+  font-size: 13px;
+}
 .Reviews3{
   background-color: rgba(255, 192, 192, 0.392);
   border-radius: 10px;
@@ -79,5 +83,17 @@
   margin:2px;
 }
 textarea{
-  height:35px;
+  height:50px;
+}
+.sortingButtons{
+  display: flex;
+  justify-content: center;
+}
+.sortingButtons button{
+  margin-top: 0px;
+  margin-bottom: 3px;
+  margin-right: 35px;
+  margin-left: 35px;
+  border: 1px rgb(215, 215, 215) solid;
+  font-size: small;
 }

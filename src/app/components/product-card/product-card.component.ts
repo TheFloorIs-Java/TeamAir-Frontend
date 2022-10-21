@@ -32,8 +32,13 @@ export class ProductCardComponent implements OnInit {
   currentReviewList: Array<number>=[];
   newRating :number=1;
   newMessage : string="";
-   addReviewButton : boolean=false;
-   reviewColor: string = "Reviews";
+  addReviewButton : boolean=false;
+  reviewColor: string = "Reviews";
+
+  highToLowClicked: boolean=false;
+  lowToHighClicked: boolean=false;
+
+
   constructor(private productService: ProductService, private reviewService : ReviewServiceService) { }
 
   ngOnInit(): void {
@@ -146,5 +151,32 @@ changeColorOfReview(avg : number): string{
     return "Reviews3";
   }
 }
+compareLowToHigh(a:Review,  b:Review): number{
+  if(a.rating<b.rating){
+    return -1;
+  }else if(a.rating>b.rating){
+    return 1;
+  }
+return 0;
+}
+compareHighToLow(a:Review,  b:Review): number{
+  if(a.rating<b.rating){
+    return 1;
+  }else if(a.rating>b.rating){
+    return -1;
+  }
+return 0;
+}
+sortingLowToHigh(reviews : Array<Review>):Array<Review>{
+  reviews.sort(this.compareLowToHigh);
+  console.log(reviews);
+  return reviews;
+}
+sortingHighToLow(reviews : Array<Review>):Array<Review>{
+  reviews.sort(this.compareHighToLow);
+  console.log(reviews);
+  return reviews;
+}
+
 
 }
