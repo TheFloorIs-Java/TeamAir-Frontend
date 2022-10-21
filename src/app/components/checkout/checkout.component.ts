@@ -20,18 +20,17 @@ export class CheckoutComponent implements OnInit {
   finalProducts: {id: number, quantity: number}[] = []; 
 
   checkoutForm = new UntypedFormGroup({
-    fname: new UntypedFormControl('', Validators.required),
-    lname: new UntypedFormControl('', Validators.required),
-    cardName: new UntypedFormControl('', Validators.required),
-    detail: new UntypedFormControl('', Validators.required),
-    addOne: new UntypedFormControl('', Validators.required),
-    addTwo: new UntypedFormControl(''),
-    city: new UntypedFormControl('', Validators.required),
-    state: new UntypedFormControl('', Validators.required),
-    zipCode: new UntypedFormControl('', Validators.required),
-    country: new UntypedFormControl('', Validators.required)
+    fullname: new UntypedFormControl('', [Validators.required]),
+    cardnumber: new UntypedFormControl('', [Validators.required]),
+    expiration: new UntypedFormControl('', [Validators.required]),
+    cvv: new UntypedFormControl('', [Validators.required]),
+    street: new UntypedFormControl('', [Validators.required]),
+    city: new UntypedFormControl('', [Validators.required]),
+    state: new UntypedFormControl('', [Validators.required]),
+    zipcode: new UntypedFormControl('', [Validators.required])
   });
 
+  submitted = false; 
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
@@ -45,8 +44,17 @@ export class CheckoutComponent implements OnInit {
       }
     );
   }
+  get f() {
+    return this.checkoutForm.controls;
+  }
+
 
   onSubmit(): void {
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.checkoutForm.invalid) {
+      return;
+    }
     this.products.forEach(
       (element) => {
         const id = element.product.id;

@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row align-items-start">
        <div class="col" *ngFor="let product of allProducts">
-            <app-product-card
+            <app-product-card (reloadReviews)="reload()"
                 class="cardListItem"
                 [productInfo]="product"
             ></app-product-card> 

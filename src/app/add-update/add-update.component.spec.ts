@@ -64,7 +64,7 @@ describe('AddUpdateComponent', () => {
   });
   it('should not add product that already exists',() =>{
     component.productList=[{id:1, name: "name", quantity:1, price:1, 
-    description: "something", image: "image"}];
+    description: "something", image: "image" , reviews:[]}];
     component.addName="name"
     component.addNewProduct()
     expect(component.message)
