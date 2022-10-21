@@ -12,7 +12,7 @@
       type="number"
       class="form-control"
       aria-label="Sizing example input"
-      [value]="productInfo.price | number : '1.2-2'"
+      [value]="productInfo.price | number: '1.2-2'"
       aria-describedby="inputGroup-sizing-sm"
       disabled
     />
@@ -90,7 +90,9 @@
   <div [hidden] = "!quantityerror">
     <p class = "error">Cannot add to cart! Not enough in stock.</p>
   </div>
-  <div [hidden] = "!cartquantityerror">
-    <p class = "error">Cannot add to cart! Amount in cart would exceed quantity in stock</p>
+  <div [hidden]="!cartquantityerror">
+    <p class="error">
+      Cannot add to cart! Amount in cart would exceed quantity in stock
+    </p>
   </div>
 </div>

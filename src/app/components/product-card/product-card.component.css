@@ -1,86 +1,85 @@
 .card {
-    size: auto;
-    min-width: 275px;
-    max-width: 200px;
-    height: fit-content;
-    transition: .2s ease-out;
-  
-  }
-  
-  img
-  {
-    justify-content: center;
-    height: 200px;
-    width: auto;
-    max-height: 200px;
-    max-width: 307px;
-    left:0;
-  }
-  
-  div {
-    position: relative;
-    transition: .2s ease-out;
-  }
-  
-  .card:hover{
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    transform: translate3d(0,-10px,0);
-  }
+  size: auto;
+  min-width: 275px;
+  max-width: 200px;
+  height: fit-content;
+  transition: 0.2s ease-out;
+}
 
-  .quantity {
-    min-width: 4em;
-    width: 10em;
-    justify-content: center;
-    display: flex;
-  }
+img {
+  justify-content: center;
+  height: 200px;
+  width: auto;
+  max-height: 200px;
+  max-width: 307px;
+  left: 0;
+}
 
-  .card-body2 {
-    display: flex;
-    padding-bottom: 1em;
-    
-  }
+div {
+  position: relative;
+  transition: 0.2s ease-out;
+}
 
-  .addbutton {
-    width: 50%;
-    justify-content: center;
-    display: flex;
-  }
-  .error {
-    color: red;
-  }
+.card:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transform: translate3d(0, -10px, 0);
+}
 
-.inputValues{
+.quantity {
+  min-width: 4em;
+  width: 10em;
+  justify-content: center;
+  display: flex;
+}
+
+.card-body2 {
+  display: flex;
+  padding-bottom: 1em;
+}
+
+.addbutton {
+  width: 50%;
+  justify-content: center;
+  display: flex;
+}
+.error {
+  color: red;
+}
+
+.inputValues {
   margin-top: 5px;
   background-color: rgba(249, 249, 249, 0.834);
   border: 1px black solid;
 }
-.Reviews{
+.Reviews {
   background-color: rgba(207, 255, 192, 0.392);
   border-radius: 10px;
   border: 1px green solid;
-  padding:5px;
-  margin:2px;
+  padding: 5px;
+  margin: 2px;
 }
-.Reviews2{
+.Reviews2 {
   background-color: rgba(246, 255, 192, 0.392);
   border-radius: 10px;
   border: 1px rgb(223, 223, 15) solid;
-  padding:5px;
-  margin:2px;
+  padding: 5px;
+  margin: 2px;
 }
-.title{
+.title {
   font-weight: 300;
 }
-.title2{
-  font-weight: 200;
-  font-size: 13px;
-}
-.Reviews3{
+.Reviews3 {
   background-color: rgba(255, 192, 192, 0.392);
   border-radius: 10px;
   border: 1px red solid;
-  padding:5px;
-  margin:2px;
+  padding: 5px;
+  margin: 2px;
+}
+textarea {
+  height: 35px;
+}
+#avg {
+  font-size: small;
 }
 textarea{
   height:50px;

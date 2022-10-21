@@ -1,10 +1,13 @@
 .table {
   margin: 3%;
-  max-width: 90%;
+  max-width: 95%;
 }
 
 .btn {
-  margin-left: 2%;
+  margin-left: 50px;
+  font-size: 16px;
+  color: rgb(61, 40, 40);
+  margin: 0 8px;
 }
 p.remove {
   text-decoration: none;
@@ -15,9 +18,8 @@ p.remove {
   font-size: 0.75em;
   display: inline-block;
   border-radius: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
   line-height: 0.85;
-  /* box-shadow: rgba(255, 255, 255, 0.08) 0px 8px 8px 0; */
   transition: all, 0.25s, linear;
 }
 p.remove:hover {

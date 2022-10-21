@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -16,6 +16,8 @@ export class CartComponent implements OnInit {
   totalPrice!: number;
   cartCounts: number = 0;
   cartProducts: Product[] = [];
+  @Input() productInfo!: Product;
+
   constructor(private productService: ProductService, private router: Router) {}
 
   /**
@@ -59,6 +61,35 @@ export class CartComponent implements OnInit {
         console.log(this.cartCounts);
         this.products.splice(i, 1);
       }
+    }
+    let cartProd = {
+      cartCount: this.cartCounts,
+      products: this.products,
+      totalPrice: this.totalPrice,
+    };
+    this.productService.setCart(cartProd);
+  }
+
+  increase(quantity: number, id: number) {
+    console.log(id);
+    if (quantity != this.products[id - 1].product.quantity) {
+      this.products[id - 1].quantity += 1;
+      this.cartCounts += 1;
+      this.totalPrice += this.products[id - 1].product.price;
+    }
+    let cartProd = {
+      cartCount: this.cartCounts,
+      products: this.products,
+      totalPrice: this.totalPrice,
+    };
+    this.productService.setCart(cartProd);
+  }
+
+  decrease(quantity: number, id: number) {
+    if (quantity != 1) {
+      this.products[id - 1].quantity -= 1;
+      this.cartCounts -= 1;
+      this.totalPrice -= this.products[id - 1].product.price;
     }
     let cartProd = {
       cartCount: this.cartCounts,

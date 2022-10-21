@@ -14,6 +14,22 @@
       <td>{{ product.product.name }}</td>
       <td>{{ product.quantity }}</td>
       <td>{{ product.product.description }}</td>
+      <button
+        type="button"
+        class="btn"
+        (click)="increase(product.quantity, product.product.id)"
+      >
+        <i class="fa fa-plus"></i>
+      </button>
+      <span>{{ product.quantity }}</span>
+      <button
+        type="button"
+        class="btn"
+        (click)="decrease(product.quantity, product.product.id)"
+        min="0"
+      >
+        <i class="fa fa-minus"></i>
+      </button>
       <p class="remove" (click)="removeItemsFromService(product.product.id)">
         x
       </p>
@@ -25,4 +41,3 @@
 <button class="btn btn-primary" [routerLink]="['/checkout']">
   Proceed to Checkout (${{ totalPrice }})
 </button>
-<!-- <span class="close">&times;</span> -->
