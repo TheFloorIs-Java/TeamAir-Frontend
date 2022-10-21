@@ -1,9 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-
 /tmp
 /out-tsc
+/karma.conf.js
 # Only exists if Bazel was run
 /bazel-out
 

@@ -43,7 +43,6 @@ export class CartComponent implements OnInit {
       totalPrice: 0.0,
     };
     this.productService.setCart(cart);
-    this.router.navigate(['/home']);
   }
 
   /**
