@@ -33,7 +33,7 @@
     />
   </div>
   <div class="card-body2">
-    <div (click)="viewReviews()" class="btn btn-light" id="avg">
+    <div (click)="this.addReviewButton=!this.addReviewButton" class="btn btn-light" id="avg">
       Rating:
      {{getAverage(productInfo.reviews) | number : '1.0-1'}}
      </div>
@@ -50,7 +50,7 @@
         Add to Cart
       </button>
     </div>
-   </div>
+    </div>
    <div *ngIf="addReviewButton" class="viewAndAddReview" >
      <div class="sortingButtons"> 
        <button  class="btn-group-toggle" (click)="lowToHighClicked = !lowToHighClicked;highToLowClicked=false" class="btn btn-light">Low to high</button>
@@ -83,7 +83,7 @@
        </div>
     </div>
     <button class="btn btn-outline-success"(click)="addReview()"> Add Review</button>
-   </div>
+  </div>
     
    
    

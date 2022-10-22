@@ -9,7 +9,7 @@
 </nav>
 
 <div id="body">
-    <div class="section">
+    <div class="section" id="addProduct">
         <h1> Add Product </h1>
         <div class="label"> Name: </div>
         <input [(ngModel)]="addName" required="" type="text" placeholder="Item Name"/>
@@ -24,7 +24,7 @@
         <button class="btn btn-outline-success" (click)="addNewProduct()">Add Item</button>
         <h4>{{message}}</h4>
     </div>
-    <div class="section">
+    <div class="section" id="updateProduct">
         <h1> Update Product </h1>
         <div class="label"> Select Name: </div>
         <select [(ngModel)]="selected" placeholder="select" (ngModelChange)="getProductSelected()">
@@ -41,8 +41,25 @@
             <div class="label"> Image: </div>
             <input  type="text" [(ngModel)]="updateImage" />
         </div>
-        <button class="btn btn-outline-success" (click)="updateProduct()">Update Item</button>
+        <button class="btn btn-outline-warning" (click)="updateProduct()">Update Item</button>
         <h4>{{message2}}</h4>
+    </div>
+    <div class="section" id="deleteReview">
+        <h1> Delete Review </h1>
+        <div class="label"> Select Product: </div>
+        <select [(ngModel)]="selected2" placeholder="select" (ngModelChange)="getProductSelected2()">
+            <option  *ngFor="let prod of productList" >{{prod.name}}
+            </option>
+        </select>
+        <div *ngIf="showReviews" id="popout">
+            <div class="label"> Select Review: </div>
+            <select [(ngModel)]="selectedReview" placeholder="select" (ngModelChange)="getReviewSelected()">
+                <option  *ngFor="let review of reviewList" >{{review.rating}}-{{review.message}}
+                </option>
+            </select>
+        </div>
+        <button class="btn btn-outline-danger" (click)="deleteReview()">Delete Review</button> 
+        <h4>{{message3}}</h4>
     </div>
 </div>   
     

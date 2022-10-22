@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
+import { Review } from '../models/review';
 import { AddUpdateServiceService } from '../services/add-update-service.service';
 import { ProductService } from '../services/product.service';
+import { ReviewServiceService } from '../services/review-service.service';
 
 @Component({
   selector: 'app-add-update',
@@ -10,7 +12,9 @@ import { ProductService } from '../services/product.service';
 })
 export class AddUpdateComponent implements OnInit {
 
-  constructor(private addupdateS : AddUpdateServiceService, private pService : ProductService) { }
+  constructor(private addupdateS : AddUpdateServiceService, 
+    private pService : ProductService,
+    private reviewService: ReviewServiceService) { }
   addProduct: boolean = true;
   
   //2-way data binded items for add menu
@@ -23,6 +27,7 @@ export class AddUpdateComponent implements OnInit {
   //error and success messages
   message :string ="";
   message2 :string="";
+  message3 :string="";
 
   //List of products 
   productList : Array<Product> =[];
@@ -35,19 +40,31 @@ export class AddUpdateComponent implements OnInit {
   updateImage :string ="";
   updateId: number=0;
 
-  //checks if anything has been selected from update dropdown menu
-  selected:any;
-  //helps with filtering for the update dropdown menu
-  filtered :any;
+//checks if anything has been selected from update dropdown menu
+selected:any;
+//helps with filtering for the update dropdown menu
+filtered :any;
 //shows the product list of item selected
 currentProduct : boolean =false;
+
+selected2: any;
+filtered2: any;
+productsToDelete: boolean=false;
+showReviews : boolean =false;
+reviewList: Array<Review> =[];
+
+selectedReview: any;
+filterReview: any;
+reviewId : number=-1;
 
   ngOnInit(): void {
     this.pService.getProducts().subscribe(data=>this.productList=data);
   }
 
  
-//adds new product with some input validation 
+/**
+ * Adds new product with some input validation 
+ */
 addNewProduct(){
   this.message="";
   if(this.addName==""){
@@ -75,8 +92,12 @@ addNewProduct(){
     this.pService.getProducts().subscribe(data=>this.productList=data);
   }
 }
-//checks if the name of the product we want to add already
-// exists in our current product array
+
+/**
+ * Checks if the name of the product exists in our current product array
+ * @param name name of the product
+ * @returns true if exists, false if it is unique
+ */
 productNameExists(name: string) : boolean{
 for(let i =0; i< this.productList.length; i++){
   if(name==this.productList[i].name){
@@ -85,7 +106,10 @@ for(let i =0; i< this.productList.length; i++){
 }return false;
 }
 
-//updates the product and adds a message
+/**
+ * Updates the product and adds a message if an item is selected
+ *  and the new price and quantity are greater than 0
+ */
 updateProduct(){
   this.message2="";
   if (this.selected!=undefined && this.updatePrice>=.01 && this.updateQuantity>0){
@@ -95,8 +119,11 @@ updateProduct(){
   }
 }
 
-//gets the selected item from the dropdown when it changes and updates the values
-// in the input boxes
+
+/**
+ *Gets the selected item from the dropdown when it changes and 
+ * updates the values in the input boxes
+ */
 getProductSelected(){
   this.filtered = this.productList.filter(t=>t =this.selected);
   for(let i=0; i< this.productList.length; i++){
@@ -109,5 +136,48 @@ getProductSelected(){
       }
   }
   this.currentProduct=true; 
+}
+/**
+ *Gets the selected product from the dropdown when it changes and
+ * updates the Review list to be deleted
+ */
+getProductSelected2(){
+  this.filtered2 = this.productList.filter(t=>t =this.selected2);
+  for(let i=0; i< this.productList.length; i++){
+    if(this.productList[i].name==this.selected2){
+      this.reviewList=this.productList[i].reviews;
+    }
+}
+  this.showReviews=true;
+}
+/**
+ *Gets the selected reiviews from the dropdown 
+ */
+getReviewSelected(){
+  this.filterReview=this.reviewList.filter(t=>t=this.selectedReview);
+  for(let i =0 ; i< this.reviewList.length; i++){
+    let str = this.reviewList[i].rating+"-"+this.reviewList[i].message;
+    if(str.replace(/\s+/g, ' ').trim()==this.selectedReview.replace(/\s+/g, ' ').trim()){
+      console.log(this.reviewList[i].id)
+      this.reviewId=this.reviewList[i].id;
+    }
+  }
+}
+
+/**
+ * Deletes a review when selected from the dropdown
+ */
+deleteReview(){
+  this.message3="";
+  if(this.reviewId!=-1 && this.getReviewSelected!=undefined){
+    this.reviewService.deleteReview(this.reviewId);
+    this.message3="Review Deleted";
+    this.showReviews=false;
+    this.reviewId=-1;
+    this.pService.getProducts().subscribe(data=>this.productList=data);
+    this.pService.getProducts().subscribe(data=>this.productList=data);
+  }else{
+    this.message3="Please select a review to delete"
+  }
 }
 }

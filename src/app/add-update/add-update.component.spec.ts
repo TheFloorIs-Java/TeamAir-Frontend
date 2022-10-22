@@ -106,5 +106,27 @@ describe('AddUpdateComponent', () => {
     expect(component.message2)
     .toBe("name updated!")
   });
+  it('should be able to delete a review',() =>{
+    component.selectedReview="1-bad review";
+    component.reviewId=1;
+    component.deleteReview();
+    expect(component.message3)
+    .toBe("Review Deleted")
+  });
+  it('should not delete a review if no review selected',() =>{
+    component.reviewId=-1;
+    component.selectedReview=undefined;
+    component.deleteReview();
+    expect(component.message3)
+    .toBe("Please select a review to delete")
+  });
+  it('should not delete a review if no product selected',() =>{
+    component.selected2=undefined;
+    component.deleteReview();
+    expect(component.message3)
+    .toBe("Please select a review to delete")
+  });
+  
+  
 
 });
