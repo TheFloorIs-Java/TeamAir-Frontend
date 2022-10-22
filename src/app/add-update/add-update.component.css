@@ -1,11 +1,10 @@
-#body{
+.body{
     display: flex;
     justify-content: center;
     text-align: center;
 }
 input, select{
     width:200px;
-    margin: 5px;
     height: 30px;
     border-radius: 8px;
     border: 1px black solid;
@@ -55,23 +54,42 @@ input, select{
 #addProduct:hover{
     box-shadow: 0 0 15px rgb(39, 166, 1); 
 }
-.button{
-    width: 150px;
-
+button{
+    margin-top: 5px;
 }
 .section{
     display: flex;
     flex-direction: column;
     border: 1px black solid;
     width: 450px;
+    padding: 5px;;
+    align-items: center;
+    margin: 20px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+}
+.empty{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
     padding: 30px;
     align-items: center;
     margin: 30px;
+    margin-top:0px;
+    padding-top: 0px;
     border-radius: 15px;
 }
-
 
 #popout{
     display: flex;
     flex-direction: column;  
+}
+#all{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+}
+.body2{
+    display: flex;
+    align-self: center;
 }

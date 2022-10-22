@@ -7,60 +7,84 @@
         <button class="btn btn-outline-danger my-2 my-sm-0" [routerLink]="['/home']">User Menu</button>
     </form>
 </nav>
-
-<div id="body">
-    <div class="section" id="addProduct">
-        <h1> Add Product </h1>
-        <div class="label"> Name: </div>
-        <input [(ngModel)]="addName" required="" type="text" placeholder="Item Name"/>
-        <div class="label"> Quantity: </div>
-        <input [(ngModel)]="addQuantity" type="number"  min="1" />
-        <div class="label"> Description: </div>
-        <input [(ngModel)]="addDescription"  type="text" placeholder="Item Description"/>
-        <div class="label"> Price: </div>
-        <input [(ngModel)]="addPrice" type="number"  min=".01" />
-        <div class="label"> Image: </div>
-        <input [(ngModel)]="addImage" type="text" placeholder="Item Image url"/>
-        <button class="btn btn-outline-success" (click)="addNewProduct()">Add Item</button>
-        <h4>{{message}}</h4>
-    </div>
-    <div class="section" id="updateProduct">
-        <h1> Update Product </h1>
-        <div class="label"> Select Name: </div>
-        <select [(ngModel)]="selected" placeholder="select" (ngModelChange)="getProductSelected()">
-            <option  *ngFor="let prod of productList" >{{prod.name}}
-            </option>
-        </select>
-        <div *ngIf="currentProduct" id="popout">
+<div id="all">
+    <div class="body">
+        <div class="section" id="addProduct">
+            <h1> Add Product </h1>
+            <div class="label"> Name: </div>
+            <input [(ngModel)]="addName" required="" type="text" placeholder="Item Name"/>
             <div class="label"> Quantity: </div>
-            <input type="number" [(ngModel)]="updateQuantity" min="1" >
+            <input [(ngModel)]="addQuantity" type="number"  min="1" />
             <div class="label"> Description: </div>
-            <input  type="text" [(ngModel)]="updateDescription"/>
+            <input [(ngModel)]="addDescription"  type="text" placeholder="Item Description"/>
             <div class="label"> Price: </div>
-            <input type="number" [(ngModel)]="updatePrice"  min=".01"/>
+            <input [(ngModel)]="addPrice" type="number"  min=".01" />
             <div class="label"> Image: </div>
-            <input  type="text" [(ngModel)]="updateImage" />
+            <input [(ngModel)]="addImage" type="text" placeholder="Item Image url"/>
+            <button class="btn btn-outline-success" (click)="addNewProduct()">Add Item</button>
+            <h4>{{message}}</h4>
         </div>
-        <button class="btn btn-outline-warning" (click)="updateProduct()">Update Item</button>
-        <h4>{{message2}}</h4>
-    </div>
-    <div class="section" id="deleteReview">
-        <h1> Delete Review </h1>
-        <div class="label"> Select Product: </div>
-        <select [(ngModel)]="selected2" placeholder="select" (ngModelChange)="getProductSelected2()">
-            <option  *ngFor="let prod of productList" >{{prod.name}}
-            </option>
-        </select>
-        <div *ngIf="showReviews" id="popout">
-            <div class="label"> Select Review: </div>
-            <select [(ngModel)]="selectedReview" placeholder="select" (ngModelChange)="getReviewSelected()">
-                <option  *ngFor="let review of reviewList" >{{review.rating}}-{{review.message}}
+        <div class="section" id="updateProduct">
+            <h1> Update Product </h1>
+            <div class="label"> Select Name: </div>
+            <select [(ngModel)]="selected" placeholder="select" (ngModelChange)="getProductSelected()">
+                <option  *ngFor="let prod of productList" >{{prod.name}}
                 </option>
             </select>
+            <div *ngIf="currentProduct" id="popout">
+                <div class="label"> Quantity: </div>
+                <input type="number" [(ngModel)]="updateQuantity" min="1" >
+                <div class="label"> Description: </div>
+                <input  type="text" [(ngModel)]="updateDescription"/>
+                <div class="label"> Price: </div>
+                <input type="number" [(ngModel)]="updatePrice"  min=".01"/>
+                <div class="label"> Image: </div>
+                <input  type="text" [(ngModel)]="updateImage" />
+            </div>
+            <button class="btn btn-outline-warning" (click)="updateProduct()">Update Item</button>
+            <h4>{{message2}}</h4>
         </div>
-        <button class="btn btn-outline-danger" (click)="deleteReview()">Delete Review</button> 
-        <h4>{{message3}}</h4>
+        <div class="section" id="deleteReview">
+            <h1> Delete Review </h1>
+            <div class="label"> Select Product: </div>
+            <select [(ngModel)]="selected2" placeholder="select" (ngModelChange)="getProductSelected2()">
+                <option  *ngFor="let prod of productList" >{{prod.name}}
+                </option>
+            </select>
+            <div *ngIf="showReviews" id="popout">
+                <div class="label"> Select Review: </div>
+                <select [(ngModel)]="selectedReview" placeholder="select" (ngModelChange)="getReviewSelected()">
+                    <option  *ngFor="let review of reviewList" >{{review.rating}}-{{review.message}}
+                    </option>
+                </select>
+            </div>
+            <button class="btn btn-outline-danger" (click)="deleteReview()">Delete Review</button> 
+            <h4>{{message3}}</h4>
+        </div>
+
+    </div >   
+    <div class="body">
+        <div  class="section"  class="empty">
+           <h3>Product Visualization</h3> 
+            <app-product-card 
+            class="cardListItem"
+            [productInfo]="{id: 1, name:this.addName, price: this.addPrice,
+                image: this.addImage, description: this.addDescription, quantity: this.addQuantity, reviews:[]}"
+        ></app-product-card> 
+        </div>
+        <div *ngIf="currentProduct" class="empty">
+            <h3>Update Visualization</h3> 
+            <app-product-card 
+            class="cardListItem"
+            [productInfo]="{id: this.updateId, name:this.selected, price: this.updatePrice,
+            image: this.updateImage, description: this.updateDescription, quantity: this.updateQuantity, reviews:this.updateReviews}"
+        ></app-product-card> 
+        </div>
+        <div *ngIf="!currentProduct" class="empty">
+        </div>
+        <div class="empty">>
+        </div>
     </div>
-</div>   
     
 
+</div>

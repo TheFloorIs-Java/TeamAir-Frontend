@@ -39,6 +39,7 @@ export class AddUpdateComponent implements OnInit {
   updatePrice : number = 0.00;
   updateImage :string ="";
   updateId: number=0;
+  updateReviews : Array<Review>=[];
 
 //checks if anything has been selected from update dropdown menu
 selected:any;
@@ -125,6 +126,7 @@ updateProduct(){
  * updates the values in the input boxes
  */
 getProductSelected(){
+  this.message2="";
   this.filtered = this.productList.filter(t=>t =this.selected);
   for(let i=0; i< this.productList.length; i++){
       if(this.productList[i].name==this.selected){
@@ -133,6 +135,7 @@ getProductSelected(){
         this.updatePrice = this.productList[i].price;
         this.updateImage = this.productList[i].image;
         this.updateId=this.productList[i].id;
+        this.updateReviews=this.productList[i].reviews;
       }
   }
   this.currentProduct=true; 
@@ -142,6 +145,7 @@ getProductSelected(){
  * updates the Review list to be deleted
  */
 getProductSelected2(){
+  this.message3="";
   this.filtered2 = this.productList.filter(t=>t =this.selected2);
   for(let i=0; i< this.productList.length; i++){
     if(this.productList[i].name==this.selected2){
@@ -154,6 +158,7 @@ getProductSelected2(){
  *Gets the selected reiviews from the dropdown 
  */
 getReviewSelected(){
+  this.message3="";
   this.filterReview=this.reviewList.filter(t=>t=this.selectedReview);
   for(let i =0 ; i< this.reviewList.length; i++){
     let str = this.reviewList[i].rating+"-"+this.reviewList[i].message;
