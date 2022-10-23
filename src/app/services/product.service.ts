@@ -36,18 +36,30 @@ export class ProductService {
   }
 
   constructor(private http: HttpClient) {}
-
+/**
+ * Gets all the products from our database
+ * @returns observable array of products
+ */
   public getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.baseUrl + this.productUrl, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });
   }
-
+/**
+ * Gets a single product by its id
+ * @param id product id
+ * @returns a product
+ */
   public getSingleProduct(id: number): Observable<Product> {
     return this.http.get<Product>(environment.baseUrl + id);
   }
 
+  /**
+   * Edits the products in the database because of a purchase
+   * @param products purchased products
+   * @returns an observable of any type
+   */
   public purchase(
     products: { id: number; quantity: number }[]
   ): Observable<any> {

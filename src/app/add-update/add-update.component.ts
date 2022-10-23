@@ -48,20 +48,25 @@ filtered :any;
 //shows the product list of item selected
 currentProduct : boolean =false;
 
+//checks if anything has been selected from delete dropdown menu
 selected2: any;
+//helps with filtering for the delete dropdown menu
 filtered2: any;
+//shows the product list of item selected
 productsToDelete: boolean=false;
-showReviews : boolean =false;
-reviewList: Array<Review> =[];
 
-selectedReview: any;
-filterReview: any;
-reviewId : number=-1;
+//2-way data binded items for delete product visualization
+productIdToDelete: number = -1;
+deleteProductShow : boolean=false;
+deleteDescription : string="";
+deleteImage: string ="";
+deleteReview : Array<Review>=[];
+deletePrice : number=0;
+deleteQuantity : number=0;
 
   ngOnInit(): void {
     this.pService.getProducts().subscribe(data=>this.productList=data);
   }
-
  
 /**
  * Adds new product with some input validation 
@@ -91,6 +96,8 @@ addNewProduct(){
     this.addImage ="";
     this.addPrice=0;
     this.pService.getProducts().subscribe(data=>this.productList=data);
+    this.pService.getProducts().subscribe(data=>this.productList=data);
+    this.pService.getProducts().subscribe(data=>this.productList=data);
   }
 }
 
@@ -117,6 +124,9 @@ updateProduct(){
   this.addupdateS.editProduct(this.selected,this.updateId,this.updateQuantity, this.updateDescription,this.updatePrice, this.updateImage);
   this.message2=this.selected + " updated!";
   this.currentProduct=false;
+  this.pService.getProducts().subscribe(data=>this.productList=data);
+  this.pService.getProducts().subscribe(data=>this.productList=data);
+  this.pService.getProducts().subscribe(data=>this.productList=data);
   }
 }
 
@@ -142,47 +152,42 @@ getProductSelected(){
 }
 /**
  *Gets the selected product from the dropdown when it changes and
- * updates the Review list to be deleted
+ * updates what the deleted product views
  */
 getProductSelected2(){
   this.message3="";
   this.filtered2 = this.productList.filter(t=>t =this.selected2);
   for(let i=0; i< this.productList.length; i++){
     if(this.productList[i].name==this.selected2){
-      this.reviewList=this.productList[i].reviews;
+      this.productIdToDelete=this.productList[i].id;
+      this.deleteImage=this.productList[i].image;
+      this.deletePrice=this.productList[i].price;
+      this.deleteQuantity=this.productList[i].quantity;
+      this.deleteDescription=this.productList[i].description;
+      this.deleteReview=this.productList[i].reviews;
     }
-}
-  this.showReviews=true;
+    this.deleteProductShow=true;
+  }
 }
 /**
- *Gets the selected reiviews from the dropdown 
+ * Deletes the product if the product was selected and updates the list
  */
-getReviewSelected(){
-  this.message3="";
-  this.filterReview=this.reviewList.filter(t=>t=this.selectedReview);
-  for(let i =0 ; i< this.reviewList.length; i++){
-    let str = this.reviewList[i].rating+"-"+this.reviewList[i].message;
-    if(str.replace(/\s+/g, ' ').trim()==this.selectedReview.replace(/\s+/g, ' ').trim()){
-      console.log(this.reviewList[i].id)
-      this.reviewId=this.reviewList[i].id;
-    }
+deleteProduct(){
+  if(this.productIdToDelete!=-1 && this.selected2!=undefined){
+    this.addupdateS.deleteProduct(this.productIdToDelete);
+    this.productIdToDelete=-1;
+    this.deleteProductShow=false;
+    this.pService.getProducts().subscribe(data=>this.productList=data);
+    this.pService.getProducts().subscribe(data=>this.productList=data);
+    this.pService.getProducts().subscribe(data=>this.productList=data);
+    this.message3=this.selected2+" deleted!";
+  }else{
+    this.message3="Please select a product";
   }
 }
 
-/**
- * Deletes a review when selected from the dropdown
- */
-deleteReview(){
-  this.message3="";
-  if(this.reviewId!=-1 && this.getReviewSelected!=undefined){
-    this.reviewService.deleteReview(this.reviewId);
-    this.message3="Review Deleted";
-    this.showReviews=false;
-    this.reviewId=-1;
-    this.pService.getProducts().subscribe(data=>this.productList=data);
-    this.pService.getProducts().subscribe(data=>this.productList=data);
-  }else{
-    this.message3="Please select a review to delete"
-  }
-}
+
+
+
+
 }

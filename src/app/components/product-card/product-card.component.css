@@ -96,3 +96,26 @@ textarea{
   border: 1px rgb(215, 215, 215) solid;
   font-size: small;
 }
+.x{
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+  border: 1px black solid;
+  border-radius: 20px;
+  background-color: transparent;
+  padding: 0.5em;
+  font-size: 0.75em;
+  display:block;
+  line-height: 0.85;
+  transition: all, 0.25s, linear;
+}
+.x:hover {
+  background: rgb(240, 58, 13);
+  color: azure;
+  cursor: pointer;
+}
+.reviewsDisplayed{
+  height: 100px;
+  overflow-y:scroll;
+}
+

@@ -23,6 +23,7 @@
             <input [(ngModel)]="addImage" type="text" placeholder="Item Image url"/>
             <button class="btn btn-outline-success" (click)="addNewProduct()">Add Item</button>
             <h4>{{message}}</h4>
+            
         </div>
         <div class="section" id="updateProduct">
             <h1> Update Product </h1>
@@ -45,26 +46,19 @@
             <h4>{{message2}}</h4>
         </div>
         <div class="section" id="deleteReview">
-            <h1> Delete Review </h1>
+            <h1> Delete Product </h1>
             <div class="label"> Select Product: </div>
             <select [(ngModel)]="selected2" placeholder="select" (ngModelChange)="getProductSelected2()">
                 <option  *ngFor="let prod of productList" >{{prod.name}}
                 </option>
             </select>
-            <div *ngIf="showReviews" id="popout">
-                <div class="label"> Select Review: </div>
-                <select [(ngModel)]="selectedReview" placeholder="select" (ngModelChange)="getReviewSelected()">
-                    <option  *ngFor="let review of reviewList" >{{review.rating}}-{{review.message}}
-                    </option>
-                </select>
-            </div>
-            <button class="btn btn-outline-danger" (click)="deleteReview()">Delete Review</button> 
+            <button class="btn btn-outline-danger" (click)="deleteProduct()">Delete Product</button> 
             <h4>{{message3}}</h4>
         </div>
 
     </div >   
     <div class="body">
-        <div  class="section"  class="empty">
+        <div    class="empty" id="addProduct">
            <h3>Product Visualization</h3> 
             <app-product-card 
             class="cardListItem"
@@ -72,7 +66,7 @@
                 image: this.addImage, description: this.addDescription, quantity: this.addQuantity, reviews:[]}"
         ></app-product-card> 
         </div>
-        <div *ngIf="currentProduct" class="empty">
+        <div *ngIf="currentProduct" class="empty" id="updateProduct">
             <h3>Update Visualization</h3> 
             <app-product-card 
             class="cardListItem"
@@ -80,10 +74,19 @@
             image: this.updateImage, description: this.updateDescription, quantity: this.updateQuantity, reviews:this.updateReviews}"
         ></app-product-card> 
         </div>
-        <div *ngIf="!currentProduct" class="empty">
+        <div *ngIf="!currentProduct" class="empty"  id="updateProduct">
         </div>
-        <div class="empty">>
+        <div *ngIf="!deleteProductShow" class="empty" id="deleteReview">
         </div>
+        <div *ngIf="deleteProductShow" class="empty"id="deleteReview">
+            <h3>Delete Visualization</h3> 
+            <app-product-card 
+            class="cardListItem"
+            [productInfo]="{id: this.productIdToDelete, name:this.selected2, price: this.deletePrice,
+            image: this.deleteImage, description: this.deleteDescription, quantity: this.deleteQuantity, reviews:this.deleteReview}"
+        ></app-product-card> 
+        </div>
+    
     </div>
     
 

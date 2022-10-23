@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { Review } from 'src/app/models/review';
+import { AddUpdateServiceService } from 'src/app/services/add-update-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ReviewServiceService } from 'src/app/services/review-service.service';
 
@@ -47,7 +49,9 @@ export class ProductCardComponent implements OnInit {
 //sets the CSS of the reviews 
  reviewColor: string = "Reviews";
 
-  constructor(private productService: ProductService, private reviewService : ReviewServiceService) { }
+  constructor(private productService: ProductService, 
+    private reviewService : ReviewServiceService, 
+    public authService: AuthService) { }
 
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
@@ -223,6 +227,13 @@ sortingHighToLow(reviews : Array<Review>):Array<Review>{
   console.log(reviews);
   return reviews;
 }
-
-
+/**
+ * Deletes a review based in its id and reloads the reviews
+ * @param id review id
+ */
+deleteReview(id:number){
+  this.reviewService.deleteReview(id);
+  this.reloadReviews.emit();
+  this.reloadReviews.emit();
+}
 }

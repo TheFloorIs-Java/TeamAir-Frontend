@@ -62,7 +62,7 @@ button{
     flex-direction: column;
     border: 1px black solid;
     width: 450px;
-    padding: 5px;;
+    padding: 5px;
     align-items: center;
     margin: 20px;
     border-radius: 15px;
@@ -71,10 +71,11 @@ button{
 .empty{
     display: flex;
     flex-direction: column;
+    border: 1px black solid;
     width: 450px;
-    padding: 30px;
+    padding: 5px;
     align-items: center;
-    margin: 30px;
+    margin: 20px;
     margin-top:0px;
     padding-top: 0px;
     border-radius: 15px;

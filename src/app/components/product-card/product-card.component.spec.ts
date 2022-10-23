@@ -197,4 +197,5 @@ describe('ProductCardComponent', () => {
     expect(component.getAverage(reviews)).toEqual(5)
   });
 
+
 });

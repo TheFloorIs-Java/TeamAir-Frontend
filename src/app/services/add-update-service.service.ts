@@ -38,6 +38,10 @@ export class AddUpdateServiceService {
      this.http.put<any>(this.authUrl,payload,{headers: environment.headers, withCredentials: environment.withCredentials}).subscribe(x=> console.log(x));
   }
 
+  public deleteProduct(id: number){
+    this.http.delete<any>(this.authUrl+"/"+id,{headers: environment.headers, withCredentials: environment.withCredentials}).subscribe(x=> console.log(x));
+  }
+
 
   
 }

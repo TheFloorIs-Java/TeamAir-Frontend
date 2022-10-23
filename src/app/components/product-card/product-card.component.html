@@ -56,19 +56,22 @@
        <button  class="btn-group-toggle" (click)="lowToHighClicked = !lowToHighClicked;highToLowClicked=false" class="btn btn-light">Low to high</button>
        <button (click)="highToLowClicked = !highToLowClicked;lowToHighClicked=false" class="btn btn-light">High to low</button>
      </div>
-     <div *ngIf="!lowToHighClicked && !highToLowClicked">
+     <div *ngIf="!lowToHighClicked && !highToLowClicked" class="reviewsDisplayed">
       <div *ngFor="let review of productInfo.reviews" class="{{this.changeColorOfReview(review.rating)}}" >
         {{review.rating}}-{{review.message}}
+        <button *ngIf="this.authService.isAdmin" (click)="deleteReview(review.id)" class="x">x</button>
       </div>
     </div>
-    <div *ngIf="lowToHighClicked && !highToLowClicked">
+    <div *ngIf="lowToHighClicked && !highToLowClicked"  class="reviewsDisplayed">
       <div *ngFor="let review of this.sortingLowToHigh(productInfo.reviews)" class="{{this.changeColorOfReview(review.rating)}}" >
         {{review.rating}}-{{review.message}}
+        <button *ngIf="this.authService.isAdmin" (click)="deleteReview(review.id)" class="x">x</button>
       </div>
     </div>
-    <div *ngIf="!lowToHighClicked && highToLowClicked">
+    <div *ngIf="!lowToHighClicked && highToLowClicked"  class="reviewsDisplayed">
       <div *ngFor="let review of this.sortingHighToLow(productInfo.reviews)" class="{{this.changeColorOfReview(review.rating)}}" >
         {{review.rating}}-{{review.message}}
+        <button *ngIf="this.authService.isAdmin" (click)="deleteReview(review.id)" class="x">x</button>
       </div>
     </div>
      <div class="inputValues">
