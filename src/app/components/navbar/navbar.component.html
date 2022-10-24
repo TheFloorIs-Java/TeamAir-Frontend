@@ -7,6 +7,7 @@
         <span *ngIf="isAdmin"> 
         <button class="btn btn-light" [routerLink]="['/add']" >Admin Options</button>
          </span>
+         <button class="btn btn-light" [routerLink]="['/reset']">Reset Password</button>
         <button class="btn btn-light" [routerLink]="['/cart']">
             Cart
             <span class="badge badge-info">{{cartCount}}</span>

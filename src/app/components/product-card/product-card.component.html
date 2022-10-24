@@ -1,4 +1,4 @@
-<div class="card" style="width: 18rem">
+<div class="card" [ngStyle]="{'width': '18rem'}" >
   <img class="card-img-top" [src]="productInfo.image" alt="Card image cap" />
   <div class="card-body">
     <h5 class="card-title">{{ productInfo.name }}</h5>
@@ -33,12 +33,11 @@
     />
   </div>
   <div class="card-body2">
-    <div class="addbutton">
-      <button class="btn btn-outline-success" (click)="addToCart(productInfo)">
-        Add to Cart
-      </button>
-    </div>
-    <div class="quantity">
+    <div (click)="this.addReviewButton=!this.addReviewButton" class="btn btn-light" id="avg">
+      Rating:
+     {{getAverage(productInfo.reviews) | number : '1.0-1'}}
+     </div>
+     <div class="quantity">
       <input
         [(ngModel)]="quantity"
         type="number"
@@ -46,35 +45,53 @@
         max="{{ productInfo.quantity }}"
       />
     </div>
-    <div (click)="viewReviews()" class="btn btn-light" id="avg">
-      Rating:
-      {{ getAverage(productInfo.reviews) | number: "1.0-1" }}
+    <div class="addbutton">
+      <button class="btn btn-outline-success" (click)="addToCart(productInfo)">
+        Add to Cart
+      </button>
     </div>
-  </div>
-  <div *ngIf="addReviewButton" class="viewAndAddReview">
-    <div
-      *ngFor="let review of productInfo.reviews"
-      class="{{ this.changeColorOfReview(review.rating) }}"
-    >
-      {{ review.rating }}-{{ review.message }}
     </div>
-    <div class="inputValues">
-      <div class="inputs">
-        <span class="title">Rating (1-10):</span>
-        <input [(ngModel)]="newRating" type="range" min="1" max="10" />
-        {{ newRating }}
-      </div>
-      <div class="inputs">
-        <span class="title">Review: </span>
-        <textarea class="form-control" [(ngModel)]="newMessage"></textarea>
+   <div *ngIf="addReviewButton" class="viewAndAddReview" >
+     <div class="sortingButtons"> 
+       <button  class="btn-group-toggle" (click)="lowToHighClicked = !lowToHighClicked;highToLowClicked=false" class="btn btn-light">Low to high</button>
+       <button (click)="highToLowClicked = !highToLowClicked;lowToHighClicked=false" class="btn btn-light">High to low</button>
+     </div>
+     <div *ngIf="!lowToHighClicked && !highToLowClicked" class="reviewsDisplayed">
+      <div *ngFor="let review of productInfo.reviews" class="{{this.changeColorOfReview(review.rating)}}" >
+        {{review.rating}}-{{review.message}}
+        <button *ngIf="this.authService.isAdmin" (click)="deleteReview(review.id)" class="x">x</button>
       </div>
     </div>
-    <button class="btn btn-outline-success" (click)="addReview()">
-      Add Review
-    </button>
+    <div *ngIf="lowToHighClicked && !highToLowClicked"  class="reviewsDisplayed">
+      <div *ngFor="let review of this.sortingLowToHigh(productInfo.reviews)" class="{{this.changeColorOfReview(review.rating)}}" >
+        {{review.rating}}-{{review.message}}
+        <button *ngIf="this.authService.isAdmin" (click)="deleteReview(review.id)" class="x">x</button>
+      </div>
+    </div>
+    <div *ngIf="!lowToHighClicked && highToLowClicked"  class="reviewsDisplayed">
+      <div *ngFor="let review of this.sortingHighToLow(productInfo.reviews)" class="{{this.changeColorOfReview(review.rating)}}" >
+        {{review.rating}}-{{review.message}}
+        <button *ngIf="this.authService.isAdmin" (click)="deleteReview(review.id)" class="x">x</button>
+      </div>
+    </div>
+     <div class="inputValues">
+       <div class="inputs">
+         <span class="title">Rating (1-10):</span>
+         <input [(ngModel)]="newRating" type="range" min="1" max="10" /> {{newRating}}
+       </div>
+       <div class="inputs">
+         <span  class="title" >Review: </span>
+         <textarea  class="form-control" [(ngModel)]="newMessage" maxlength="50"></textarea>
+         <span class="title2">Characters left: {{50-newMessage.length}}</span>
+       </div>
+    </div>
+    <button class="btn btn-outline-success"(click)="addReview()"> Add Review</button>
   </div>
-  <div [hidden]="!quantityerror">
-    <p class="error">Cannot add to cart! Not enough in stock.</p>
+    
+   
+   
+  <div [hidden] = "!quantityerror">
+    <p class = "error">Cannot add to cart! Not enough in stock.</p>
   </div>
   <div [hidden]="!cartquantityerror">
     <p class="error">

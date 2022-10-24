@@ -2,11 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ProductCardComponent } from './product-card.component';
 import { Product } from 'src/app/models/product';
+import { Review } from 'src/app/models/review';
 
 describe('ProductCardComponent', () => {
 
   let component: ProductCardComponent;
   let fixture: ComponentFixture<ProductCardComponent>;
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -28,6 +30,7 @@ describe('ProductCardComponent', () => {
     }
 
     fixture.detectChanges();
+     
   });
 
 
@@ -148,4 +151,51 @@ describe('ProductCardComponent', () => {
       quantity: 3,
     })
   });
+
+  it('should not add review if message is empty', () => {
+    component.newMessage="";
+    component.addReview();
+    expect(component.productInfo.reviews.length).toBe(0);
+  });
+
+  it('should add review', () => {
+    component.newMessage="hi";
+    component.newRating=2;
+    component.addReview();
+    expect(component.newMessage).toBe("");
+    expect(component.newRating).toBe(1);
+  });
+
+  it('should sort High to low', () => {
+    let reviews =[
+     {id:2, rating: 1 , message:"hi"},
+       {id:1, rating: 2 , message:"hoop"}
+    ]
+    expect(component.sortingHighToLow(reviews)).toEqual([
+      {id:1, rating: 2 , message:"hoop"},
+      {id:2, rating: 1 , message:"hi"}]
+     );
+  });
+
+  it('should sort Low to High', () => {
+    let reviews =[
+     {id:2, rating: 2 , message:"hi"},
+       {id:1, rating: 1 , message:"hoop"}
+    ]
+    expect(component.sortingLowToHigh(reviews)).toEqual([
+      {id:1, rating: 1 , message:"hoop"},
+      {id:2, rating: 2 , message:"hi"}]
+     );
+  });
+
+  it('should get average rating', () => {
+    component.getAverage
+    let reviews =[
+      {id:2, rating: 9 , message:"hi"},
+        {id:1, rating: 1 , message:"hoop"}
+    ]
+    expect(component.getAverage(reviews)).toEqual(5)
+  });
+
+
 });

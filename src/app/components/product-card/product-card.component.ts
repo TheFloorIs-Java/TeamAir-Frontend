@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { Review } from 'src/app/models/review';
+import { AddUpdateServiceService } from 'src/app/services/add-update-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ReviewServiceService } from 'src/app/services/review-service.service';
 
@@ -30,20 +32,27 @@ export class ProductCardComponent implements OnInit {
   totalPrice: number = 0;
 
 
-
   @Input() productInfo!: Product;
+  // @Input() backgroundColor!: string;
+  // @Input() color!:string;
 
-
+//event emitter that reloads the reviews when new one is added
   @Output()
   reloadReviews: EventEmitter<any> = new EventEmitter<any>();
 
-  currentReviewList: Array<number> = [];
-  newRating: number = 1;
-  newMessage: string = "";
-  addReviewButton: boolean = false;
-  reviewColor: string = "Reviews";
+//variables that hold the new rating
+  newRating :number=1;
+  newMessage : string="";
+//booleans that control your view of the reviews
+  addReviewButton : boolean=false;
+  highToLowClicked: boolean=false;
+  lowToHighClicked: boolean=false;
+//sets the CSS of the reviews 
+ reviewColor: string = "Reviews";
 
-  constructor(private productService: ProductService, private reviewService: ReviewServiceService) { }
+  constructor(private productService: ProductService, 
+    private reviewService : ReviewServiceService, 
+    public authService: AuthService) { }
 
   ngOnInit(): void {
     this.subscription = this.productService.getCart().subscribe(
@@ -128,20 +137,25 @@ export class ProductCardComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * Adds a review to a product if the message is not blank
+   */
   addReview() {
     if (this.newMessage != "") {
       this.reviewService.addNewReview(this.productInfo.id, this.newRating, this.newMessage);
       this.newMessage = "";
       this.newRating = 1;
+      this.reloadReviews.emit();
+      this.reloadReviews.emit();
     }
-    this.reloadReviews.emit();
-    this.reloadReviews.emit();
 
   }
-  viewReviews() {
-    this.addReviewButton = !this.addReviewButton;
-  }
 
+  /**
+   * Sets the average rating of the product
+   * @param reviews list of reviews of a product
+   * @returns average rating
+   */
   getAverage(reviews: Array<Review>): number {
     let avg = 0;
     for (let i = 0; i < reviews.length; i++) {
@@ -152,15 +166,78 @@ export class ProductCardComponent implements OnInit {
     }
     return avg;
   }
-
-  changeColorOfReview(avg: number): string {
-    if (avg <= 10 && avg >= 8) {
+/**
+ * Sets the CSS class depending on the rating of a review
+ * @param rating from 1-10 of a review
+ * @returns CSS class the review will get
+ */
+  changeColorOfReview(rating: number): string {
+    if (rating <= 10 && rating >= 8) {
       return "Reviews";
-    } else if (avg <= 7 && avg >= 5) {
+    } else if (rating <= 7 && rating >= 5) {
       return "Reviews2";
     } else {
       return "Reviews3";
     }
   }
+/**
+ * Sorting function for Low to High Review List
+ * @param a review 1
+ * @param b review 2
+ * @returns the placement for the sorting function
+ */
+compareLowToHigh(a:Review,  b:Review): number{
+  if(a.rating<b.rating){
+    return -1;
+  }else if(a.rating>b.rating){
+    return 1;
+  }
+return 0;
+}
+/**
+ * Sorting function for High to Low Review List
+ * @param a review 1
+ * @param b review 2
+ * @returns the placement for the sorting function
+ */
+compareHighToLow(a:Review,  b:Review): number{
+  if(a.rating<b.rating){
+    return 1;
+  }else if(a.rating>b.rating){
+    return -1;
+  }
+return 0;
+}
+/**
+ * Sorts the List of Reviews from lowest to highest rating
+ * @param reviews list of reviews
+ * @returns sorted list of reviews
+ */
+sortingLowToHigh(reviews : Array<Review>):Array<Review>{
+  reviews.sort(this.compareLowToHigh);
+  console.log(reviews);
+  return reviews;
+}
+/**
+ * Sorts the List of Reviews from highest to lowest rating
+ * @param reviews list of reviews
+ * @returns sorted list of reviews
+ */
+sortingHighToLow(reviews : Array<Review>):Array<Review>{
+  reviews.sort(this.compareHighToLow);
+  console.log(reviews);
+  return reviews;
+}
+/**
+ * Deletes a review based in its id and reloads the reviews
+ * @param id review id
+ */
+deleteReview(id:number){
+  this.reviewService.deleteReview(id);
+  this.reloadReviews.emit();
+  this.reloadReviews.emit();
+  this.reloadReviews.emit();
+}
+
 
 }

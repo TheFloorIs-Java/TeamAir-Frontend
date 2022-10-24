@@ -6,6 +6,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { DisplayProductsComponent } from './components/display-products/display-products.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: "home", component: DisplayProductsComponent },
   { path: "cart", component: CartComponent },
   { path: "checkout", component: CheckoutComponent },
-  { path: "add", component: AddUpdateComponent }
+  { path: "add", component: AddUpdateComponent },
+  { path: "reset", component: ResetPasswordComponent}
 ];
 
 @NgModule({

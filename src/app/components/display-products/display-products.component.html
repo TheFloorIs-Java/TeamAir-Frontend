@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container">
+    <!-- <button (click)="changeStyle()">nightMode</button> -->
     <div class="row align-items-start">
        <div class="col" *ngFor="let product of allProducts">
             <app-product-card (reloadReviews)="reload()"

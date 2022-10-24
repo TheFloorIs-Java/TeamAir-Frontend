@@ -13,6 +13,8 @@ export class NavbarComponent implements OnInit{
 
   cartCount!: number;
   subscription!: Subscription;
+  //checks if the logged in person is admin, 
+  //  getting access to the admin menu (add-update-component)
   isAdmin: boolean =this.authService.isAdmin;
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }

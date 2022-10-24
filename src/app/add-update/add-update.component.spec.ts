@@ -106,5 +106,21 @@ describe('AddUpdateComponent', () => {
     expect(component.message2)
     .toBe("name updated!")
   });
+  it('should be able to delete a product',() =>{
+    component.selected2="name";
+    component.productIdToDelete=1;
+    component.deleteProduct()
+    expect(component.message3)
+    .toBe("name deleted!")
+  });
+  it('should not delete a product when product is not selected',() =>{
+    component.deleteProduct()
+    expect(component.message3)
+    .toBe("Please select a product")
+  });
+
+  
+  
+  
 
 });

@@ -1,32 +1,101 @@
-#body{
+.body{
     display: flex;
     justify-content: center;
     text-align: center;
 }
 input, select{
     width:200px;
-    margin: 5px;
     height: 30px;
+    border-radius: 8px;
+    border: 1px black solid;
 }
-
-.button{
-    width: 150px;
-
+#deleteReview{
+    border: 1px rgb(192, 0, 0) solid;
+    background-color: rgba(255, 0, 0, 0.092);
+}
+#deleteReview select{
+    border: 1px rgb(192, 0, 0) solid; 
+}
+#deleteReview .label{
+   font-weight: 300;
+   color: rgb(192, 0, 0);
+}
+#deleteReview:hover{
+    box-shadow: 0 0 15px rgb(255, 4, 4); 
+}
+#updateProduct{
+    border: 1px orange solid;
+    background-color: rgba(255, 179, 0, 0.112);
+}
+#updateProduct select{
+    border: 1px orange solid;
+}
+#updateProduct input{
+    border: 1px orange solid;
+}
+#updateProduct:hover{
+    box-shadow: 0 0 15px rgb(255, 176, 4); 
+}
+#updateProduct .label{
+   font-weight: 300;
+   color: rgb(143, 117, 0);
+}
+#addProduct{
+    border: 1px rgb(42, 192, 0) solid;
+    background-color: rgba(89, 255, 0, 0.092);
+}
+#addProduct input{
+    border: 1px rgb(42, 192, 0) solid;
+}
+#addProduct .label{
+   font-weight: 300;
+   color: rgb(0, 137, 11);
+}
+#addProduct:hover{
+    box-shadow: 0 0 15px rgb(39, 166, 1); 
+}
+button{
+    margin-top: 5px;
 }
 .section{
     display: flex;
     flex-direction: column;
     border: 1px black solid;
     width: 450px;
-    padding: 30px;
+    padding: 5px;
     align-items: center;
-    margin: 30px;
+    margin: 20px;
+    border-radius: 15px;
+    margin-bottom: 5px;
 }
-.section:hover{
-    box-shadow: 0 0 15px rgba(33, 33, 33, 0.295); 
+.empty{
+    display: flex;
+    flex-direction: column;
+    border: 1px black solid;
+    width: 450px;
+    padding: 5px;
+    align-items: center;
+    margin: 20px;
+    margin-top:0px;
+    padding-top: 0px;
+    border-radius: 15px;
 }
 
 #popout{
     display: flex;
     flex-direction: column;  
+}
+#all{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+}
+.body2{
+    display: flex;
+    align-self: center;
+}
+small{
+    color: rgb(231, 50, 50);
+    font-size: 13px;
+    
 }
