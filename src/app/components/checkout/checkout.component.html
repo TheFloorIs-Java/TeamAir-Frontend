@@ -1,150 +1,218 @@
 <app-navbar></app-navbar>
 <form id="register-form" [formGroup]="checkoutForm">
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()"> 
-<div class="container mt-5 px-5">
-
-    <div class="mb-4">
-
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div class="container mt-5 px-5">
+      <div class="mb-4">
         <h2>Confirm order and pay</h2>
-    <span>Please confirm your payment details below</span>
-        
-    </div>
-    <div class="row">
+        <span>Please confirm your payment details below</span>
+      </div>
+      <div class="row">
         <div class="col-md-8">
-            <div class="card p-3">
-
-                <h6 class="text-uppercase">Payment details</h6>
-                <div class="inputbox mt-3"> <input type="text" class="form-control" formControlName="fullname" id="inputFullName" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }">
-                    <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
-                    <div *ngIf="f.fullname.errors.required"> First name is required</div>
-                      </div>  
-                
-                    <span>Name on card</span> </div>
-
-                <div class="row">
-
-                    <div class="col-md-6">
-
-                        <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="cardnumber" id="inputCardNumber" placeholder="1234 5678 8765 4321" [ngClass]="{ 'is-invalid': submitted && f.cardnumber.errors }"> 
-                            <div *ngIf="submitted && f.cardnumber.errors" class="invalid-feedback">
-                                <div *ngIf="f.cardnumber.errors.required"> Invaid card information </div>
-                                  </div>  
-                            
-                        
-                                  <i class="fa fa-credit-card"></i> 
-                            
-                        
-                        <span>Card Number</span> 
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex flex-row">
-                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="expiration" id="inputExpiration" [ngClass]="{ 'is-invalid': submitted && f.expiration.errors }"> <span>MM/YY</span> 
-                                <div *ngIf="submitted && f.expiration.errors" class="invalid-feedback">
-                                    <div *ngIf="f.expiration.errors.required"> Invalid expiration date </div>
-                                      </div>
-                            
-                            </div>
-
-                        <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="cvv" id="inputExpiration" [ngClass]="{ 'is-invalid': submitted && f.cvv.errors }"> <span>CVV</span> 
-                            <div *ngIf="submitted && f.cvv.errors" class="invalid-feedback">
-                                <div *ngIf="f.cvv.errors.required">Invalid CVV</div>
-                                  </div>
-                        
-                        
-                        
-                        </div>
-                        </div>                        
-                    </div>                   
+          <div class="card p-3">
+            <h6 class="text-uppercase">Payment details</h6>
+            <div class="inputbox mt-3">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="fullname"
+                id="inputFullName"
+                [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }"
+              />
+              <div
+                *ngIf="submitted && f.fullname.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.fullname.errors.required">
+                  First name is required
                 </div>
+              </div>
 
-                <div class="mt-4 mb-4">
-
-                    <h6 class="text-uppercase">Billing Address</h6>
-                    <div class="row mt-3">
-
-                        <div class="col-md-6">
-
-                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="street" id="inputStreet" [ngClass]="{ 'is-invalid': submitted && f.street.errors }"> <span>Street Address</span> 
-                                <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
-                                    <div *ngIf="f.street.errors.required">Invalid Address</div>
-                                      </div>
-                            
-                            
-                            </div>
-                            
-                        </div>
-
-
-                        <div class="col-md-6">
-
-                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="city" id="inputCity" [ngClass]="{ 'is-invalid': submitted && f.city.errors }"  > <span>City</span> 
-                                <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                                    <div *ngIf="f.city.errors.required">Invalid City</div>
-                                      </div>
-                            
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="row mt-2">
-
-                        <div class="col-md-6">
-
-                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="state" id="inputState" [ngClass]="{ 'is-invalid': submitted && f.state.errors }"> <span>State/Province</span> 
-                                <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
-                                    <div *ngIf="f.state.errors.required">Invalid State</div>
-                                      </div>
-                            
-                            </div>        
-
-                        </div>
-                        <div class="col-md-6">
-
-                            <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="zipcode" id="inputZipcode" [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }"  > <span>Zip code</span> 
-                                <div *ngIf="submitted && f.zipcode.errors" class="invalid-feedback">
-                                    <div *ngIf="f.zipcode.errors.required">Invalid Zip code</div>
-                                      </div>
-                            
-                            </div>              
-
-                        </div>                      
-                    </div>
-                </div>
+              <span>Name on card</span>
             </div>
 
-            <div class="mt-4 mb-4 d-flex justify-content-between">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="inputbox mt-3 mr-2">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="cardnumber"
+                    id="inputCardNumber"
+                    placeholder="1234 5678 8765 4321"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.cardnumber.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && f.cardnumber.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.cardnumber.errors.required">
+                      Invaid card information
+                    </div>
+                  </div>
 
-                <button class="btn btn-danger" [routerLink]="['/cart']">Back to Cart</button>
+                  <i class="fa fa-credit-card"></i>
 
-                <button class="btn btn-success px-3" (click)="onSubmit();">Pay ${{totalPrice}}</button>
+                  <span>Card Number</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="d-flex flex-row">
+                  <div class="inputbox mt-3 mr-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="expiration"
+                      id="inputExpiration"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.expiration.errors
+                      }"
+                    />
+                    <span>MM/YY</span>
+                    <div
+                      *ngIf="submitted && f.expiration.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.expiration.errors.required">
+                        Invalid expiration date
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="inputbox mt-3 mr-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="cvv"
+                      id="inputExpiration"
+                      [ngClass]="{ 'is-invalid': submitted && f.cvv.errors }"
+                    />
+                    <span>CVV</span>
+                    <div
+                      *ngIf="submitted && f.cvv.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.cvv.errors.required">Invalid CVV</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
+            <div class="mt-4 mb-4">
+              <h6 class="text-uppercase">Billing Address</h6>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="inputbox mt-3 mr-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="street"
+                      id="inputStreet"
+                      [ngClass]="{ 'is-invalid': submitted && f.street.errors }"
+                    />
+                    <span>Street Address</span>
+                    <div
+                      *ngIf="submitted && f.street.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.street.errors.required">
+                        Invalid Address
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="inputbox mt-3 mr-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="city"
+                      id="inputCity"
+                      [ngClass]="{ 'is-invalid': submitted && f.city.errors }"
+                    />
+                    <span>City</span>
+                    <div
+                      *ngIf="submitted && f.city.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.city.errors.required">Invalid City</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-md-6">
+                  <div class="inputbox mt-3 mr-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="state"
+                      id="inputState"
+                      [ngClass]="{ 'is-invalid': submitted && f.state.errors }"
+                    />
+                    <span>State/Province</span>
+                    <div
+                      *ngIf="submitted && f.state.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.state.errors.required">Invalid State</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="inputbox mt-3 mr-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="zipcode"
+                      id="inputZipcode"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.zipcode.errors
+                      }"
+                    />
+                    <span>Zip code</span>
+                    <div
+                      *ngIf="submitted && f.zipcode.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.zipcode.errors.required">
+                        Invalid Zip code
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 mb-4 d-flex justify-content-between">
+            <button class="btn btn-danger" [routerLink]="['/cart']">
+              Back to Cart
+            </button>
+
+            <button class="btn btn-success px-3" (click)="onSubmit()">
+              Pay ${{ totalPrice }}
+            </button>
+          </div>
         </div>
 
         <div class="col-md-4">
-
-            <div class="card card-blue p-3 text-white mb-3">
-
+          <div class="card card-blue p-3 text-white mb-3">
             <span>Order Total: </span>
-                <div class="d-flex flex-row align-items-end mb-3">
-                    <h1 class="mb-0 yellow">${{totalPrice}}</h1>
-                </div>
-
-                <div class="hightlight">
-
-                    <span>100% Satisfaction Guaranteed!</span>
-                    
-
-                </div>
-                
+            <div class="d-flex flex-row align-items-end mb-3">
+              <h1 class="mb-0 yellow">${{ totalPrice }}</h1>
             </div>
-            
+
+            <div class="hightlight">
+              <span>100% Satisfaction Guaranteed!</span>
+            </div>
+          </div>
         </div>
-        
+      </div>
     </div>
-</div>
+  </form>
 </form>
