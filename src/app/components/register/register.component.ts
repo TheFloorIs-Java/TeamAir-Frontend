@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -29,6 +30,8 @@ export class RegisterComponent implements OnInit {
 
   
   onSubmit(): void {
+
+   // emailList : Array<User> =[];
 
     this.submitted = true;
 
