@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
       (data) => {
         this.authService.loggedIn=true;
+        this.authService.email = data.email;
+        this.authService.id = data.id;
         this.authService.isAdmin=(data.userOrAdmin=="admin"); //checks for admin, if true then they are admin
       },
       (err) => 

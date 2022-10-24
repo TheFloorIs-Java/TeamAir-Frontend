@@ -25,6 +25,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     CheckoutComponent,
     DisplayProductsComponent,
     AddUpdateComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
