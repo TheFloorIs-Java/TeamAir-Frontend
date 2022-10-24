@@ -71,16 +71,31 @@ export class CartComponent implements OnInit {
   }
 
   /**
+   * This method loops through the products array to get the index of the product IDs.
+   * @param id id to be used to update
+   * @returns the index from the products array
+   */
+  idSelector(id: number): number {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].product.id == id) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  /**
    * This function increments the quantity of the product selected corresponding to its id
    * @param quantity quantity of the product in the cart
    * @param id associated id with the product in the cart
    */
   increase(quantity: number, id: number) {
     console.log(id);
-    if (quantity != this.products[id - 1].product.quantity) {
-      this.products[id - 1].quantity += 1;
+    let idx = this.idSelector(id);
+    if (quantity != this.products[idx].product.quantity) {
+      this.products[idx].quantity += 1;
       this.cartCounts += 1;
-      this.totalPrice += this.products[id - 1].product.price;
+      this.totalPrice += this.products[idx].product.price;
     }
     let cartProd = {
       cartCount: this.cartCounts,
@@ -95,10 +110,11 @@ export class CartComponent implements OnInit {
    * @param id associated id with the product in the cart
    */
   decrease(quantity: number, id: number) {
+    let idx = this.idSelector(id);
     if (quantity != 1) {
-      this.products[id - 1].quantity -= 1;
+      this.products[idx].quantity -= 1;
       this.cartCounts -= 1;
-      this.totalPrice -= this.products[id - 1].product.price;
+      this.totalPrice -= this.products[idx].product.price;
     }
     let cartProd = {
       cartCount: this.cartCounts,
