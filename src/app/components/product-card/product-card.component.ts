@@ -32,8 +32,9 @@ export class ProductCardComponent implements OnInit {
   totalPrice: number = 0;
 
 
-
   @Input() productInfo!: Product;
+  // @Input() backgroundColor!: string;
+  // @Input() color!:string;
 
 //event emitter that reloads the reviews when new one is added
   @Output()
@@ -235,5 +236,8 @@ deleteReview(id:number){
   this.reviewService.deleteReview(id);
   this.reloadReviews.emit();
   this.reloadReviews.emit();
+  this.reloadReviews.emit();
 }
+
+
 }

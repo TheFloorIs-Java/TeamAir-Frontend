@@ -94,3 +94,8 @@ button{
     display: flex;
     align-self: center;
 }
+small{
+    color: rgb(231, 50, 50);
+    font-size: 13px;
+    
+}

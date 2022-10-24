@@ -127,6 +127,8 @@ updateProduct(){
   this.pService.getProducts().subscribe(data=>this.productList=data);
   this.pService.getProducts().subscribe(data=>this.productList=data);
   this.pService.getProducts().subscribe(data=>this.productList=data);
+  }else{
+    this.message2="Please select a product"
   }
 }
 

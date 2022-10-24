@@ -22,7 +22,7 @@
             <div class="label"> Image: </div>
             <input [(ngModel)]="addImage" type="text" placeholder="Item Image url"/>
             <button class="btn btn-outline-success" (click)="addNewProduct()">Add Item</button>
-            <h4>{{message}}</h4>
+            <small>{{message}}</small>
             
         </div>
         <div class="section" id="updateProduct">
@@ -43,7 +43,7 @@
                 <input  type="text" [(ngModel)]="updateImage" />
             </div>
             <button class="btn btn-outline-warning" (click)="updateProduct()">Update Item</button>
-            <h4>{{message2}}</h4>
+            <small>{{message2}}</small>
         </div>
         <div class="section" id="deleteReview">
             <h1> Delete Product </h1>
@@ -53,7 +53,7 @@
                 </option>
             </select>
             <button class="btn btn-outline-danger" (click)="deleteProduct()">Delete Product</button> 
-            <h4>{{message3}}</h4>
+            <small>{{message3}}</small>
         </div>
 
     </div >   
