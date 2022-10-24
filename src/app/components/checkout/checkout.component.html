@@ -6,7 +6,7 @@
     <div class="mb-4">
 
         <h2>Confirm order and pay</h2>
-    <span>Please make the payment, after that you can enjoy all the features and benefits.</span>
+    <span>Please confirm your payment details below</span>
         
     </div>
     <div class="row">
@@ -25,7 +25,7 @@
 
                     <div class="col-md-6">
 
-                        <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="cardnumber" id="inputCardNumber" [ngClass]="{ 'is-invalid': submitted && f.cardnumber.errors }"> 
+                        <div class="inputbox mt-3 mr-2"> <input type="text" class="form-control" formControlName="cardnumber" id="inputCardNumber" placeholder="1234 5678 8765 4321" [ngClass]="{ 'is-invalid': submitted && f.cardnumber.errors }"> 
                             <div *ngIf="submitted && f.cardnumber.errors" class="invalid-feedback">
                                 <div *ngIf="f.cardnumber.errors.required"> Invaid card information </div>
                                   </div>  
@@ -129,7 +129,7 @@
 
             <div class="card card-blue p-3 text-white mb-3">
 
-            <span>You have to pay</span>
+            <span>Order Total: </span>
                 <div class="d-flex flex-row align-items-end mb-3">
                     <h1 class="mb-0 yellow">${{totalPrice}}</h1>
                 </div>
