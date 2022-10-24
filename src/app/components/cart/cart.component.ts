@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) {}
 
   /**
-   * adds the products from the product list to the Shopping Cart
+   * This method adds the products from the product list to the Shopping Cart
    * adds up total price and cart count in the Shopping Cart
    */
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
         this.cartProducts.push(element.product)
       ); // to add products from products section to the cart
       this.totalPrice = cart.totalPrice; // adds the total price
-      this.cartCounts = cart.cartCount; //
+      this.cartCounts = cart.cartCount; // adds up the total products in the cart
     });
   }
 
@@ -48,8 +48,8 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * This function should remove each individual product based on its id from cart after a click event fires.
-   * This should also decrement from the total price and the cart count from the Shopping Cart.
+   * This method removes each individual product based on its id from cart after a click event fires.
+   * This also decrements the total price and the cart count from the Shopping Cart.
    * @param id the item selected for removal
    */
   removeItemsFromService(id: number): void {
@@ -71,16 +71,31 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * This function increments the quantity of the product selected corresponding to its id
+   * This method loops through the products array to get the index of the product IDs.
+   * @param id id to be used to update
+   * @returns the index from the products array
+   */
+  idSelector(id: number): number {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].product.id == id) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * This method increments the quantity of the product selected corresponding to its id
    * @param quantity quantity of the product in the cart
    * @param id associated id with the product in the cart
    */
   increase(quantity: number, id: number) {
     console.log(id);
-    if (quantity != this.products[id - 1].product.quantity) {
-      this.products[id - 1].quantity += 1;
+    let idx = this.idSelector(id);
+    if (quantity != this.products[idx].product.quantity) {
+      this.products[idx].quantity += 1;
       this.cartCounts += 1;
-      this.totalPrice += this.products[id - 1].product.price;
+      this.totalPrice += this.products[idx].product.price;
     }
     let cartProd = {
       cartCount: this.cartCounts,
@@ -89,16 +104,18 @@ export class CartComponent implements OnInit {
     };
     this.productService.setCart(cartProd);
   }
+
   /**
-   * This function decrements the quantity of the product selected corresponding to its id
+   * This method decrements the quantity of the product selected corresponding to its id
    * @param quantity quantity of the product in the cart
    * @param id associated id with the product in the cart
    */
   decrease(quantity: number, id: number) {
+    let idx = this.idSelector(id);
     if (quantity != 1) {
-      this.products[id - 1].quantity -= 1;
+      this.products[idx].quantity -= 1;
       this.cartCounts -= 1;
-      this.totalPrice -= this.products[id - 1].product.price;
+      this.totalPrice -= this.products[idx].product.price;
     }
     let cartProd = {
       cartCount: this.cartCounts,

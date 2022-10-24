@@ -1,32 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  success = "";
+  success = '';
   loginForm = new UntypedFormGroup({
     email: new UntypedFormControl('', [Validators.required]),
-    password: new UntypedFormControl('', [Validators.required])
-  })
-  
-  submitted = false; 
-  constructor(private authService: AuthService, private router: Router) { }
-  
-  message: String =  ""; 
+    password: new UntypedFormControl('', [Validators.required]),
+  });
 
+  submitted = false;
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  message: String = '';
+
+  ngOnInit(): void {}
+
+  /**
+   * This getter method checks if the login form inputs are in a certain way and returns it
+   */
   get f() {
     return this.loginForm.controls;
   }
 
+  /**
+   * This method is triggered after the user submits their credentials
+   * If the login is invalid, it will exit the method
+   * Otherwise, get the login credentials and if they are correct, redirect to the home page
+   * and if the user is an admin, redirect to the home page with admin options
+   */
   onSubmit(): void {
     this.submitted = true;
 
@@ -48,8 +61,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  /**
+   * This method redirects the page to the register page
+   */
   register(): void {
     this.router.navigate(['register']);
   }
-
 }

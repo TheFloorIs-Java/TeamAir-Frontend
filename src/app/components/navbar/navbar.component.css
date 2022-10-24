@@ -1,0 +1,14 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: teal;
+}
+.btn {
+  margin-right: 20px;
+}
+.navbar {
+  background-color: #f0f8ff;
+}

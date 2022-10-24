@@ -1,17 +1,36 @@
-<nav class="navbar navbar-light bg-light">
-    <h4>
-        <img src="../../../assets/images/favicon.png" width="8%" height="8%" alt="Revature">
-        Revature Swag Shop
-    </h4>
-    <form class="form-inline">
-        <span *ngIf="isAdmin"> 
-        <button class="btn btn-light" [routerLink]="['/add']" >Admin Options</button>
-         </span>
-         <button class="btn btn-light" [routerLink]="['/reset']">Reset Password</button>
-        <button class="btn btn-light" [routerLink]="['/cart']">
-            Cart
-            <span class="badge badge-info">{{cartCount}}</span>
-        </button>
-        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout();">Logout</button>
-    </form>
+<nav class="navbar">
+  <h4>
+    <a [routerLink]="['/home']">
+      <img
+        src="../../../assets/images/airlogo.png"
+        width="8%"
+        height="8%"
+        alt="Revature"
+      />
+      Air Tech Shop
+    </a>
+  </h4>
+  <form class="form-inline">
+    <span *ngIf="isAdmin">
+      <button class="btn btn-outline-dark my-2 my-sm-0" [routerLink]="['/add']">
+        Admin Options
+      </button>
+    </span>
+    <button
+      class="btn btn-outline-warning my-2 my-sm-0"
+      [routerLink]="['/reset']"
+    >
+      Reset Password
+    </button>
+    <button
+      class="btn btn-outline-secondary my-2 my-sm-0"
+      [routerLink]="['/cart']"
+    >
+      Cart
+      <span class="badge badge-info">{{ cartCount }}</span>
+    </button>
+    <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()">
+      Logout
+    </button>
+  </form>
 </nav>

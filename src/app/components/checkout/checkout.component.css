@@ -81,12 +81,12 @@ input::-webkit-inner-spin-button {
 
 .card-blue{
 
-    background-color: #F26925;
+    background-color: teal;
 }
 
 .hightlight{
 
-    background-color: #F26925;
+    background-color: teal;
     padding: 10px;
     border-radius: 10px;
     margin-top: 15px;
@@ -107,13 +107,13 @@ input::-webkit-inner-spin-button {
 .btn-success {
     color: #fff;
     background-color: #F26925;
-    border-color:#F26925;
+    border-color: teal;
 }
 
 .btn-success:hover {
     color: #fff;
-    background-color:green;
-    border-color: green;
+    background-color: teal;
+    border-color: teal;
 }
 
 
