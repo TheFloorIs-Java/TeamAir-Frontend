@@ -4,27 +4,58 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   authUrl: string = `${environment.baseUrl}/auth`;
   loggedIn: boolean = false;
-  isAdmin: boolean =false; //checks for admin
+  isAdmin: boolean = false; //checks for admin
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
+  /**
+   * This method posts the User credentials for login
+   * @param email email submitted by the user
+   * @param password password submitted by the user
+   * @returns the POST response from the server side
+   */
   login(email: string, password: string): Observable<any> {
-    const payload = {email:email, password:password};
-    return this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
+    const payload = { email: email, password: password };
+    return this.http.post<any>(`${this.authUrl}/login`, payload, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
   }
 
-  logout(): void{
+  /**
+   * This method posts the url that logs the User out
+   */
+  logout(): void {
     this.http.post(`${this.authUrl}/logout`, null);
   }
 
-  register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
-    const payload = {firstName: firstName, lastName: lastName, email: email, password: password};
-    return this.http.post<any>(`${this.authUrl}/register`, payload, {headers: environment.headers});
+  /**
+   * This method registers a new user in the database
+   * @param firstName first name of the new User to be added
+   * @param lastName last name of the new User to be added
+   * @param email email of the new User to be added
+   * @param password password of the new User to be added
+   * @returns the POST response from the server side
+   */
+  register(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ): Observable<any> {
+    const payload = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+    return this.http.post<any>(`${this.authUrl}/register`, payload, {
+      headers: environment.headers,
+    });
   }
 }

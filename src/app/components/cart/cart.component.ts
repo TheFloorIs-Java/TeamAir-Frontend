@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) {}
 
   /**
-   * adds the products from the product list to the Shopping Cart
+   * This method adds the products from the product list to the Shopping Cart
    * adds up total price and cart count in the Shopping Cart
    */
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
         this.cartProducts.push(element.product)
       ); // to add products from products section to the cart
       this.totalPrice = cart.totalPrice; // adds the total price
-      this.cartCounts = cart.cartCount; //
+      this.cartCounts = cart.cartCount; // adds up the total products in the cart
     });
   }
 
@@ -48,8 +48,8 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * This function should remove each individual product based on its id from cart after a click event fires.
-   * This should also decrement from the total price and the cart count from the Shopping Cart.
+   * This method removes each individual product based on its id from cart after a click event fires.
+   * This also decrements the total price and the cart count from the Shopping Cart.
    * @param id the item selected for removal
    */
   removeItemsFromService(id: number): void {
@@ -85,7 +85,7 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * This function increments the quantity of the product selected corresponding to its id
+   * This method increments the quantity of the product selected corresponding to its id
    * @param quantity quantity of the product in the cart
    * @param id associated id with the product in the cart
    */
@@ -104,8 +104,9 @@ export class CartComponent implements OnInit {
     };
     this.productService.setCart(cartProd);
   }
+
   /**
-   * This function decrements the quantity of the product selected corresponding to its id
+   * This method decrements the quantity of the product selected corresponding to its id
    * @param quantity quantity of the product in the cart
    * @param id associated id with the product in the cart
    */

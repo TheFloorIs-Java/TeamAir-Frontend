@@ -1,6 +1,7 @@
 .card {
   size: auto;
   min-width: 275px;
+  margin-top: 30px;
   max-width: 200px;
   height: fit-content;
   transition: 0.2s ease-out;
@@ -81,14 +82,14 @@ textarea {
 #avg {
   font-size: small;
 }
-textarea{
-  height:50px;
+textarea {
+  height: 50px;
 }
-.sortingButtons{
+.sortingButtons {
   display: flex;
   justify-content: center;
 }
-.sortingButtons button{
+.sortingButtons button {
   margin-top: 0px;
   margin-bottom: 3px;
   margin-right: 35px;
@@ -96,7 +97,7 @@ textarea{
   border: 1px rgb(215, 215, 215) solid;
   font-size: small;
 }
-.x{
+.x {
   text-decoration: none;
   color: #000000;
   font-weight: bold;
@@ -105,7 +106,7 @@ textarea{
   background-color: transparent;
   padding: 0.5em;
   font-size: 0.75em;
-  display:block;
+  display: block;
   line-height: 0.85;
   transition: all, 0.25s, linear;
 }
@@ -114,8 +115,7 @@ textarea{
   color: azure;
   cursor: pointer;
 }
-.reviewsDisplayed{
+.reviewsDisplayed {
   height: 100px;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
-

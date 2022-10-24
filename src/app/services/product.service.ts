@@ -27,36 +27,47 @@ export class ProductService {
 
   private _cart$ = this._cart.asObservable();
 
+  /**
+   * This method gets the filled up cart
+   * @returns the to-be-populated cart by the _cart object
+   */
   getCart(): Observable<Cart> {
     return this._cart$;
   }
 
+  /**
+   * This method sets the populated cart into an emptied cart
+   * @param latestValue the filled up cart
+   * @returns the emptied cart object
+   */
   setCart(latestValue: Cart) {
     return this._cart.next(latestValue);
   }
 
   constructor(private http: HttpClient) {}
-/**
- * Gets all the products from our database
- * @returns observable array of products
- */
+
+  /**
+   * This method gets all the products from our database
+   * @returns observable array of products
+   */
   public getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.baseUrl + this.productUrl, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });
   }
-/**
- * Gets a single product by its id
- * @param id product id
- * @returns a product
- */
+
+  /**
+   * This method gets a single product by its id
+   * @param id product id
+   * @returns a product
+   */
   public getSingleProduct(id: number): Observable<Product> {
     return this.http.get<Product>(environment.baseUrl + id);
   }
 
   /**
-   * Edits the products in the database because of a purchase
+   * This method edits the products in the database because of a purchase
    * @param products purchased products
    * @returns an observable of any type
    */
