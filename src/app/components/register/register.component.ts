@@ -43,6 +43,8 @@ export class RegisterComponent implements OnInit {
    * There is input checking here, such as checking if the user alreday exists or not
    */
   onSubmit(): void {
+    // emailList : Array<User> =[];
+
     this.submitted = true;
 
     // stop here if form is invalid

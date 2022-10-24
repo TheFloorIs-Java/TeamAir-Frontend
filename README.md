@@ -1,27 +1,57 @@
-# ECommerce
+# Air Tech App
+A Full Stack Application for buying secondhand technology at a bargain price. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+## Contributors
+Kainoa Aquino,
+Ilma Shaharin, 
+Jacob Nattoli,
+Harveen Grewal
 
-## Development server
+## To Get Started
+Navigate to https://team-air-frontend.azurewebsites.net/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+(We recommend using Google Chrome or Microsoft Edge as your Web Browser)
+1. Log In or Register
+![alt text](./src/assets/images/logInPhoto.png)
 
-## Code scaffolding
+2. **View, Add, Buy, and Enjoy!**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features For All Users:
+- Sign up or Log in 
+- Add various quantities of a product to your cart 
+- Add or Remove products from your cart by quantity
+- Delete specific items from your cart entirely
+- View average rating of products
+- Change ordering of reviews by their rating
+- Add your own reviews for a product
 
-## Build
+## Bonus Features For Admin:
+- Remove specific reviews of a product
+- Add a Product
+- Update a Poduct
+- Remove a Product
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Front End Technology
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
-## Running unit tests
+- Testing was done with Jasmine and Karma.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Back End Technology
 
-## Running end-to-end tests
+- Java with Maven as the build automation tool.  
+- Spring as the Inversion of Control Container
+    - Hibernate as the implementation of the Spring Data JPA  
+    - Authentication and access verification as Cross Cutting Conserns solved with Aspects
+- Mockito with JUnit for testing
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Database 
+Azure SQL Database hosted on the cloud.
 
-## Further help
+##  DevOps and Deployment
+- Development Operation (front-end/back-end):  GitHub Actions
+- Deployment (front-end/back-end): Azure Web Services
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Original Code
+Front-end:https://drive.google.com/file/d/1hnDsZIkLoaOu_Ca8maFylm86kK3YwvVe/view
+
+Back-end:https://drive.google.com/file/d/1kh_ap9Z2JgvWiRBJvSyh21Z5cYJiKJo5/view
