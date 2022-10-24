@@ -82,21 +82,21 @@ describe('AddUpdateComponent', () => {
     component.selected=undefined;
     component.updateProduct()
     expect(component.message2)
-    .toBe("")
+    .toBe("Please select a product")
   });
   it('should not update a product if new price is less than or equal to 0',() =>{
     component.selected=undefined;
     component.updatePrice=-1;
     component.updateProduct()
     expect(component.message2)
-    .toBe("")
+    .toBe("Please select a product")
   });
   it('should not update a product if new quanity is less than or equal to 0',() =>{
     component.selected=undefined;
     component.updateQuantity=-1;
     component.updateProduct()
     expect(component.message2)
-    .toBe("")
+    .toBe("Please select a product")
   });
   it('should be able to update a product',() =>{
     component.selected="name";
