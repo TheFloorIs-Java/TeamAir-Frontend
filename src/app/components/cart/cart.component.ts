@@ -36,7 +36,7 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * This method clears the Shopping Cart and routes back to the page where products are displayed
+   * This method clears the Shopping Cart
    */
   emptyCart(): void {
     let cart = {
@@ -48,7 +48,7 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * This method should remove each individual product from cart after a click event fires.
+   * This function should remove each individual product based on its id from cart after a click event fires.
    * This should also decrement from the total price and the cart count from the Shopping Cart.
    * @param id the item selected for removal
    */
@@ -70,6 +70,11 @@ export class CartComponent implements OnInit {
     this.productService.setCart(cartProd);
   }
 
+  /**
+   * This function increments the quantity of the product selected corresponding to its id
+   * @param quantity quantity of the product in the cart
+   * @param id associated id with the product in the cart
+   */
   increase(quantity: number, id: number) {
     console.log(id);
     if (quantity != this.products[id - 1].product.quantity) {
@@ -84,7 +89,11 @@ export class CartComponent implements OnInit {
     };
     this.productService.setCart(cartProd);
   }
-
+  /**
+   * This function decrements the quantity of the product selected corresponding to its id
+   * @param quantity quantity of the product in the cart
+   * @param id associated id with the product in the cart
+   */
   decrease(quantity: number, id: number) {
     if (quantity != 1) {
       this.products[id - 1].quantity -= 1;

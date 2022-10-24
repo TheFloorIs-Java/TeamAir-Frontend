@@ -6,6 +6,7 @@
       <th scope="col">Name</th>
       <th scope="col">Quantity</th>
       <th scope="col">Description</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody id="cart-table-body">
@@ -17,18 +18,17 @@
       <button
         type="button"
         class="btn"
-        (click)="increase(product.quantity, product.product.id)"
+        (click)="decrease(product.quantity, product.product.id)"
       >
-        <i class="fa fa-plus"></i>
+        <i class="fa fa-minus"></i>
       </button>
       <span>{{ product.quantity }}</span>
       <button
         type="button"
         class="btn"
-        (click)="decrease(product.quantity, product.product.id)"
-        min="0"
+        (click)="increase(product.quantity, product.product.id)"
       >
-        <i class="fa fa-minus"></i>
+        <i class="fa fa-plus"></i>
       </button>
       <p class="remove" (click)="removeItemsFromService(product.product.id)">
         x

@@ -1,49 +1,73 @@
 <nav class="navbar navbar-light bg-light">
-    <h4>
-        <img src="../../../assets/images/favicon.png" width="8%" height="8%" alt="Revature">
-        Revature Swag Shop
-    </h4>
-    <form class="form-inline">
-        <button class="btn btn-outline-danger my-2 my-sm-0" [routerLink]="['/home']">User Menu</button>
-    </form>
+  <h4>
+    <img
+      src="../../../assets/images/favicon.png"
+      width="8%"
+      height="8%"
+      alt="Revature"
+    />
+    Revature Swag Shop
+  </h4>
+  <form class="form-inline">
+    <button
+      class="btn btn-outline-danger my-2 my-sm-0"
+      [routerLink]="['/home']"
+    >
+      User Menu
+    </button>
+  </form>
 </nav>
 
 <div id="body">
-    <div class="section">
-        <h1> Add Product </h1>
-        <div class="label"> Name: </div>
-        <input [(ngModel)]="addName" required="" type="text" placeholder="Item Name"/>
-        <div class="label"> Quantity: </div>
-        <input [(ngModel)]="addQuantity" type="number"  min="1" />
-        <div class="label"> Description: </div>
-        <input [(ngModel)]="addDescription"  type="text" placeholder="Item Description"/>
-        <div class="label"> Price: </div>
-        <input [(ngModel)]="addPrice" type="number"  min=".01" />
-        <div class="label"> Image: </div>
-        <input [(ngModel)]="addImage" type="text" placeholder="Item Image url"/>
-        <button class="btn btn-outline-success" (click)="addNewProduct()">Add Item</button>
-        <h4>{{message}}</h4>
+  <div class="section">
+    <h1>Add Product</h1>
+    <div class="label">Name:</div>
+    <input
+      [(ngModel)]="addName"
+      required=""
+      type="text"
+      placeholder="Item Name"
+    />
+    <div class="label">Quantity:</div>
+    <input [(ngModel)]="addQuantity" type="number" min="1" />
+    <div class="label">Description:</div>
+    <input
+      [(ngModel)]="addDescription"
+      type="text"
+      placeholder="Item Description"
+    />
+    <div class="label">Price:</div>
+    <input [(ngModel)]="addPrice" type="number" min=".01" />
+    <div class="label">Image:</div>
+    <input [(ngModel)]="addImage" type="text" placeholder="Item Image url" />
+    <button class="btn btn-outline-success" (click)="addNewProduct()">
+      Add Item
+    </button>
+    <h4>{{ message }}</h4>
+  </div>
+  <div class="section">
+    <h1>Update Product</h1>
+    <div class="label">Select Name:</div>
+    <select
+      [(ngModel)]="selected"
+      placeholder="select"
+      (ngModelChange)="getProductSelected()"
+    >
+      <option *ngFor="let prod of productList">{{ prod.name }}</option>
+    </select>
+    <div *ngIf="currentProduct" id="popout">
+      <div class="label">Quantity:</div>
+      <input type="number" [(ngModel)]="updateQuantity" min="1" />
+      <div class="label">Description:</div>
+      <input type="text" [(ngModel)]="updateDescription" />
+      <div class="label">Price:</div>
+      <input type="number" [(ngModel)]="updatePrice" min=".01" />
+      <div class="label">Image:</div>
+      <input type="text" [(ngModel)]="updateImage" />
     </div>
-    <div class="section">
-        <h1> Update Product </h1>
-        <div class="label"> Select Name: </div>
-        <select [(ngModel)]="selected" placeholder="select" (ngModelChange)="getProductSelected()">
-            <option  *ngFor="let prod of productList" >{{prod.name}}
-            </option>
-        </select>
-        <div *ngIf="currentProduct" id="popout">
-            <div class="label"> Quantity: </div>
-            <input type="number" [(ngModel)]="updateQuantity" min="1" >
-            <div class="label"> Description: </div>
-            <input  type="text" [(ngModel)]="updateDescription"/>
-            <div class="label"> Price: </div>
-            <input type="number" [(ngModel)]="updatePrice"  min=".01"/>
-            <div class="label"> Image: </div>
-            <input  type="text" [(ngModel)]="updateImage" />
-        </div>
-        <button class="btn btn-outline-success" (click)="updateProduct()">Update Item</button>
-        <h4>{{message2}}</h4>
-    </div>
-</div>   
-    
-
+    <button class="btn btn-outline-success" (click)="updateProduct()">
+      Update Item
+    </button>
+    <h4>{{ message2 }}</h4>
+  </div>
+</div>
