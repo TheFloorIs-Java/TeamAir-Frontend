@@ -16,21 +16,27 @@
         Admin Options
       </button>
     </span>
-    <button
-      class="btn btn-outline-warning my-2 my-sm-0"
-      [routerLink]="['/reset']"
-    >
-      Reset Password
-    </button>
+
     <button
       class="btn btn-outline-secondary my-2 my-sm-0"
       [routerLink]="['/cart']"
     >
-      Cart
+      🛒Cart
       <span class="badge badge-info">{{ cartCount }}</span>
     </button>
-    <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()">
-      Logout
-    </button>
+    <div class="btn-group dropleft">
+      <button
+        class="btn btn-info dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      ></button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" [routerLink]="['/reset']"> Reset Password </a>
+        <a class="dropdown-item" (click)="logout()" id="logout"> Logout → </a>
+      </div>
+    </div>
   </form>
 </nav>

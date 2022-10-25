@@ -12,3 +12,10 @@ a:hover {
 .navbar {
   background-color: #f0f8ff;
 }
+.dropdown-menu {
+  margin-top: 50px;
+}
+.dropdown-item:hover {
+  cursor: pointer;
+  font-size: large;
+}

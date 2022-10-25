@@ -1,25 +1,44 @@
-<img src="../../../assets/images/air Logo(3).png" width="40%" height="40%" alt="Revature">
+<img
+  src="../../../assets/images/air Logo(3).png"
+  width="40%"
+  height="40%"
+  alt="Revature"
+/>
 <form id="login-form" [formGroup]="loginForm">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-        <div *ngIf="f.email.errors.required"> Email cannot be empty</div>
-      </div>
-     <!-- <small id="emailHelp" class="form-text text-muted">Ensure you enter the correct email</small> -->
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      formControlName="email"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      placeholder="Enter email"
+      [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+    />
+    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+      <div *ngIf="f.email.errors.required">Email cannot be empty</div>
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required"> Password cannot be empty</div>
-      </div>
+    <!-- <small id="emailHelp" class="form-text text-muted">Ensure you enter the correct email</small> -->
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      formControlName="password"
+      id="exampleInputPassword1"
+      placeholder="Password"
+      [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+    />
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors.required">Password cannot be empty</div>
     </div>
-    <small> {{message}}  </small>
-    <br> <br>
-   
-    
-    <button class="btn btn-primary" (click)="onSubmit()">Login</button>
-    <button class="btn btn-primary" [routerLink]="['/register']">Register</button>
-    
+  </div>
+  <small> {{ message }} </small>
+  <br />
+  <br />
+
+  <button class="btn btn-primary" (click)="onSubmit()">Login</button>
+  <button class="btn btn-info" [routerLink]="['/register']">Register</button>
 </form>
