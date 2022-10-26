@@ -35,6 +35,7 @@ export class ResetPasswordComponent implements OnInit {
         (data) => {
           this.message = '';
           if (this.newPassword == this.newPasswordReEnter) {
+            this.message = 'Password reset!';
             let user: User = {
               id: this.authService.id,
               email: '',
