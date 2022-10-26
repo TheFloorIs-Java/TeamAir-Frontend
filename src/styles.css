@@ -1,6 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files
 body{
-    background: linear-gradient(300deg,#f0f8ff,#afd6f7,#f0f8ff,#88c0eb,#bff1f9,#b0deff,#fefefe,#f0f8ff);
+    background: linear-gradient(300deg,#f0f8ff,#fafafa,#f0f8ff,#fafafa,#f0f8ff,#afd6f7,#f0f8ff,#fafafa);
     background-size: 480% 480%;
     animation: gradient-animation 48s ease infinite;
 }
@@ -15,4 +15,4 @@ body{
   100% {
     background-position: 0% 50%;
   }
-}
+} */
