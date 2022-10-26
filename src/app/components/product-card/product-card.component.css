@@ -1,10 +1,13 @@
 .card {
   size: auto;
   min-width: 275px;
-  margin-top: 30px;
+  margin: 5px;
+  padding: 5px;
   max-width: 200px;
   height: fit-content;
   transition: 0.2s ease-out;
+  border-radius: 10px;
+  border-color: rgba(0, 148, 148, 0.802);
 }
 
 img {
@@ -13,6 +16,7 @@ img {
   width: auto;
   max-height: 200px;
   max-width: 307px;
+  border-radius: 10px;
 }
 
 div {
@@ -21,7 +25,7 @@ div {
 }
 
 .card:hover {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(2, 134, 129, 0.405);
   transform: translate3d(0, -10px, 0);
 }
 
@@ -48,8 +52,8 @@ div {
 
 .inputValues {
   margin-top: 5px;
-  background-color: rgba(249, 249, 249, 0.834);
-  border: 1px black solid;
+  background-color: #f0f8ffcd;
+  border: 1px lightgray solid;
 }
 .Reviews {
   background-color: rgba(207, 255, 192, 0.392);
@@ -117,4 +121,11 @@ textarea {
 .reviewsDisplayed {
   height: 100px;
   overflow-y: scroll;
+}
+
+input:disabled, .input-group-text{
+  background-color:#f0f8ffcd;
+  border: none;
+  border-top: 1px lightgray solid;
+  border-bottom: 1px lightgray solid;
 }

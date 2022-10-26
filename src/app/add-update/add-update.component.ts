@@ -20,9 +20,9 @@ export class AddUpdateComponent implements OnInit {
   //2-way data binded items for add menu
   addName : string ="";
   addQuantity : number =0;
-  addDescription :string="";
+  addDescription :string="This is a product you can buy.";
   addPrice : number = 0;
-  addImage :string ="";
+  addImage :string ="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Question_Mark.svg/2560px-Question_Mark.svg.png";
 
   //error and success messages
   message :string ="";
@@ -95,6 +95,7 @@ addNewProduct(){
     this.addDescription="";
     this.addImage ="";
     this.addPrice=0;
+    this.pService.getProducts().subscribe(data=>this.productList=data);
     this.pService.getProducts().subscribe(data=>this.productList=data);
     this.pService.getProducts().subscribe(data=>this.productList=data);
     this.pService.getProducts().subscribe(data=>this.productList=data);
