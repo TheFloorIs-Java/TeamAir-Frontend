@@ -41,7 +41,7 @@ Navigate to https://team-air-frontend.azurewebsites.net/
 - Java with Maven as the build automation tool.  
 - Spring as the Inversion of Control Container
     - Hibernate as the implementation of the Spring Data JPA  
-    - Authentication and access verification as Cross Cutting Conserns solved with Aspects
+    - Authentication and access verification as Cross Cutting Concerns solved with Aspects
 - Mockito with JUnit for testing
 
 ## Database 
