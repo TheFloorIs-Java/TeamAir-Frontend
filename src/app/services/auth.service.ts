@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
@@ -14,7 +15,7 @@ export class AuthService {
   id: number = 0;
   email: string = "";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   /**
    * This method posts the User credentials for login
@@ -70,4 +71,23 @@ export class AuthService {
     console.log(user);
     this.http.patch<User>(`${this.authUrl}/reset`, user).subscribe(data => console.log(data));
   }
+
+  /**
+   * Routing guard function that restricts access to the home page 
+   *  if you are not logged in
+   * @param route the route we used 
+   * @param state the current state of the route
+   * @returns true or false if logged in
+   */
+canActivate(route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot): boolean {
+  if (!this.loggedIn)  {
+    alert('You are not allowed to view this page until you log in');
+    this.router.navigateByUrl('');
+    return false;
+  } 
+    return true;
+}
+
+
 }

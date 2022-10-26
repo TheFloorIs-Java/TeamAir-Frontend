@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 import { ProductService } from './product.service';
 
 @Injectable({
@@ -10,7 +12,7 @@ import { ProductService } from './product.service';
 export class AddUpdateServiceService {
   authUrl: string = `${environment.baseUrl}/api/product`;
 
-  constructor(private http: HttpClient, private productS: ProductService) {}
+  constructor(private http: HttpClient, private productS: ProductService, private auth: AuthService, private router: Router) {}
 
   /**
    * This method adds a product to the database
@@ -87,4 +89,20 @@ export class AddUpdateServiceService {
       })
       .subscribe((x) => console.log(x));
   }
+   /**
+   * Routing guard function that restricts access to the admin page 
+   *  if you are not admin
+   * @param route the route we used 
+   * @param state the current state of the route
+   * @returns true or false if admin logged in
+   */
+    canActivate(route: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot): boolean {
+      if (!this.auth.isAdmin)  {
+        alert('You are not allowed to view this page');
+        this.router.navigateByUrl('/home');
+        return false;
+      } 
+        return true;
+    }
 }
