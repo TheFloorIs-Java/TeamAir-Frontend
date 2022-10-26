@@ -4,7 +4,7 @@ A Full Stack Application for buying secondhand technology at a bargain price.
 ## Contributors
 Kainoa Aquino,
 Ilma Shaharin, 
-Jacob Nattoli,
+Jacob Nottoli,
 Harveen Grewal
 
 ## To Get Started
