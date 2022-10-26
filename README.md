@@ -33,7 +33,7 @@ Navigate to https://team-air-frontend.azurewebsites.net/
 
 ## Front End Technology
 - This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
-
+- Route Gauarding was implemented
 - Testing was done with Jasmine and Karma.
 
 ## Back End Technology
