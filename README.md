@@ -45,7 +45,7 @@ Navigate to https://team-air-frontend.azurewebsites.net/
 - Mockito with JUnit for testing
 
 ## Database 
-Azure SQL Database hosted on the cloud.
+- Azure SQL Database hosted on the cloud.
 
 ##  DevOps and Deployment
 - Development Operation (front-end/back-end):  GitHub Actions
